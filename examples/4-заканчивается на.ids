@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ids xsi:noNamespaceSchemaLocation="ids.xsd" xmlns="http://standards.buildingsmart.org/IDS" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <info>
+        <title>Сгенерированная проверка</title>
+        <copyright>Пользователь</copyright>
+        <version>IFC4</version>
+        <author>romanvladi2@gmail.com</author>
+        <date>2025-11-14</date>
+    </info>
+    <specifications>
+        <specification name="2. IfcWall - Стена, перегородка" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcWall</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Wall</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value=".*20 10$"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+    </specifications>
+</ids>

@@ -1,0 +1,589 @@
+/* css/style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+body {
+    background: #f5f7fa;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Шапка */
+.header {
+    background: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e1e4e8;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.filename {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.filename:hover {
+    border-color: #d0d7de;
+}
+
+.filename:focus {
+    border-color: #0366d6;
+    outline: none;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-valid {
+    background: #dafbe1;
+    color: #1a7f37;
+}
+
+.status-invalid {
+    background: #ffebe9;
+    color: #cf222e;
+}
+
+.file-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: #0969da;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0a4b8a;
+}
+
+.btn-secondary {
+    background: #f6f8fa;
+    color: #24292f;
+    border: 1px solid #d0d7de;
+}
+
+.btn-secondary:hover {
+    background: #eaeef2;
+}
+
+.btn-success {
+    background: #1f883d;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #177532;
+}
+
+/* Основной контейнер */
+.main-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Левая панель */
+.info-panel {
+    width: 280px;
+    background: white;
+    border-right: 1px solid #e1e4e8;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.info-panel h3 {
+    margin-bottom: 1.5rem;
+    color: #24292f;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+    color: #57606a;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #0969da;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(9,105,218,0.1);
+}
+
+/* Центральная панель */
+.spec-panel {
+    flex: 1;
+    background: #f5f7fa;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.panel-header {
+    padding: 1rem 1.5rem;
+    background: white;
+    border-bottom: 1px solid #e1e4e8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-header h2 {
+    font-size: 1.2rem;
+    color: #24292f;
+}
+
+.btn-small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+}
+
+.spec-list {
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Карточка спецификации */
+.spec-card {
+    background: white;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.spec-card:hover {
+    border-color: #0969da;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.spec-card.selected {
+    border-color: #0969da;
+    border-width: 2px;
+    background: #f6f9ff;
+}
+
+.spec-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.spec-name {
+    font-weight: 600;
+    color: #24292f;
+    border: none;
+    background: transparent;
+    padding: 0.2rem;
+    font-size: 1rem;
+    width: 70%;
+}
+
+.spec-name:hover {
+    background: #f6f8fa;
+    border-radius: 4px;
+}
+
+.spec-actions {
+    display: flex;
+    gap: 0.3rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.spec-card:hover .spec-actions {
+    opacity: 1;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+
+.icon-btn:hover {
+    background: #f0f3f6;
+}
+
+.spec-preview {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #57606a;
+}
+
+.spec-badge {
+    background: #e6edf6;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.spec-count {
+    color: #6e7781;
+}
+
+/* Правая панель */
+.editor-panel {
+    width: 380px;
+    background: white;
+    border-left: 1px solid #e1e4e8;
+    display: flex;
+    flex-direction: column;
+}
+
+.badge {
+    background: #e6edf6;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.editor-content {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.placeholder {
+    color: #8c959f;
+    text-align: center;
+    margin-top: 2rem;
+    font-style: italic;
+}
+
+/* Стили для форм редактирования (будут добавляться динамически) */
+.rule-group {
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.rule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.rule-type {
+    font-weight: 600;
+    color: #0969da;
+}
+
+.rule-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.condition-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.condition-select {
+    padding: 0.4rem;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+    flex: 1;
+}
+
+.value-input {
+    flex: 2;
+    padding: 0.4rem;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+}
+
+.btn-remove {
+    color: #cf222e;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+}
+
+.add-condition {
+    color: #0969da;
+    background: none;
+    border: 1px dashed #d0d7de;
+    padding: 0.4rem;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.add-condition:hover {
+    background: #f6f9ff;
+}
+
+/* css/style.css (дополнение) */
+
+/* Пустое состояние */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #8c959f;
+    background: white;
+    border: 2px dashed #d0d7de;
+    border-radius: 8px;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state small {
+    font-size: 0.9rem;
+}
+
+/* Редактор правил - вкладки */
+.editor-tabs {
+    display: flex;
+    border-bottom: 1px solid #e1e4e8;
+    margin-bottom: 1rem;
+}
+
+.editor-tab {
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-weight: 500;
+    color: #57606a;
+}
+
+.editor-tab.active {
+    color: #0969da;
+    border-bottom-color: #0969da;
+}
+
+.editor-tab:hover {
+    color: #24292f;
+}
+
+/* Секции редактора */
+.editor-section {
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #57606a;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+/* Карточка правила */
+.rule-card {
+    background: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.rule-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.rule-type-badge {
+    background: #0969da;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.rule-cardinality {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background: #e6edf6;
+}
+
+.cardinality-required {
+    background: #ffebe9;
+    color: #cf222e;
+}
+
+.cardinality-optional {
+    background: #fff8c5;
+    color: #7d4e00;
+}
+
+/* Форма правила */
+.rule-field {
+    margin-bottom: 0.5rem;
+}
+
+.rule-field label {
+    display: block;
+    font-size: 0.8rem;
+    color: #57606a;
+    margin-bottom: 0.2rem;
+}
+
+.rule-field select,
+.rule-field input {
+    width: 100%;
+    padding: 0.4rem;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Множественные значения (для перечислений) */
+.values-list {
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.value-item {
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+    border-bottom: 1px solid #e1e4e8;
+}
+
+.value-item:last-child {
+    border-bottom: none;
+}
+
+.value-item input {
+    flex: 1;
+    border: none;
+    padding: 0.2rem;
+}
+
+.value-item input:focus {
+    outline: none;
+    background: #f6f8fa;
+}
+
+.remove-value {
+    color: #cf222e;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.9rem;
+}
+
+.add-value {
+    width: 100%;
+    padding: 0.4rem;
+    background: none;
+    border: 1px dashed #d0d7de;
+    border-radius: 4px;
+    color: #0969da;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+/* Кнопки действий в редакторе */
+.editor-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e1e4e8;
+}
+
+.btn-block {
+    width: 100%;
+    padding: 0.6rem;
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-block:hover {
+    background: #eaeef2;
+}
+
+.btn-danger {
+    background: #ffebe9;
+    border-color: #ffc9c7;
+    color: #cf222e;
+}
+
+.btn-danger:hover {
+    background: #ffcecb;
+}

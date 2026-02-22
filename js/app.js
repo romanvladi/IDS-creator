@@ -1,0 +1,838 @@
+// js/app.js
+
+// Глобальные переменные
+let currentIDS = {
+    info: {
+        title: 'Без имени',
+        copyright: 'Пользователь',
+        version: 'IFC4',
+        author: '',
+        date: new Date().toISOString().split('T')[0]
+    },
+    specifications: []
+};
+
+let selectedSpecId = null;
+let parser = null;
+
+// Ждем загрузки DOM
+document.addEventListener('DOMContentLoaded', () => {
+    // Инициализируем парсер
+    parser = new IDSParser();
+    
+    // Устанавливаем сегодняшнюю дату
+    document.getElementById('infoDate').value = currentIDS.info.date;
+    
+    // Заполняем информацию о файле
+    updateInfoFromCurrent();
+    
+    // Загружаем пример для демонстрации (можно будет загрузить позже)
+    // loadExampleFile('examples/1-ravno-ili-ravno.xml');
+    
+    // Настраиваем обработчики событий
+    setupEventListeners();
+});
+
+/**
+ * Настройка обработчиков событий
+ */
+function setupEventListeners() {
+    // Кнопки управления файлом
+    document.getElementById('newFile').addEventListener('click', createNewFile);
+    document.getElementById('openFile').addEventListener('click', openFile);
+    document.getElementById('saveFile').addEventListener('click', saveFile);
+    
+    // Кнопка добавления спецификации
+    document.getElementById('addSpec').addEventListener('click', addNewSpecification);
+    
+    // Поля информации о файле
+    document.getElementById('infoTitle').addEventListener('input', updateInfoFromForm);
+    document.getElementById('infoAuthor').addEventListener('input', updateInfoFromForm);
+    document.getElementById('infoIfcVersion').addEventListener('change', updateInfoFromForm);
+    document.getElementById('infoDate').addEventListener('change', updateInfoFromForm);
+    document.getElementById('infoCopyright').addEventListener('input', updateInfoFromForm);
+    
+    // Поле имени файла в шапке
+    document.querySelector('.filename').addEventListener('input', (e) => {
+        currentIDS.info.title = e.target.value;
+        document.getElementById('infoTitle').value = e.target.value;
+    });
+}
+
+/**
+ * Создать новый файл
+ */
+function createNewFile() {
+    if (confirm('Создать новый файл? Несохраненные изменения будут потеряны.')) {
+        currentIDS = {
+            info: {
+                title: 'Новый файл.ids',
+                copyright: 'Пользователь',
+                version: 'IFC4',
+                author: '',
+                date: new Date().toISOString().split('T')[0]
+            },
+            specifications: []
+        };
+        
+        // Обновляем интерфейс
+        document.querySelector('.filename').value = currentIDS.info.title;
+        updateInfoFromCurrent();
+        renderSpecifications();
+        
+        // Очищаем редактор
+        selectedSpecId = null;
+        document.getElementById('selectedSpecName').textContent = 'Не выбрано';
+        document.getElementById('editorContent').innerHTML = '<p class="placeholder">Выберите спецификацию для редактирования</p>';
+    }
+}
+
+/**
+ * Открыть файл
+ */
+function openFile() {
+    // Создаем скрытый input для загрузки файла
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.ids,.xml';
+    
+    input.onchange = (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                // Парсим файл
+                const parsed = parser.parse(e.target.result);
+                
+                // Обновляем текущий IDS
+                currentIDS = parsed;
+                
+                // Обновляем имя файла в шапке
+                document.querySelector('.filename').value = file.name;
+                
+                // Обновляем информацию о файле
+                updateInfoFromCurrent();
+                
+                // Отрисовываем спецификации
+                renderSpecifications();
+                
+                // Сбрасываем выделение
+                selectedSpecId = null;
+                document.getElementById('selectedSpecName').textContent = 'Не выбрано';
+                document.getElementById('editorContent').innerHTML = '<p class="placeholder">Выберите спецификацию для редактирования</p>';
+                
+                // Обновляем статус валидации
+                document.querySelector('.status-badge').className = 'status-badge status-valid';
+                document.querySelector('.status-badge').textContent = 'Валидно';
+                
+            } catch (error) {
+                alert('Ошибка при загрузке файла: ' + error.message);
+                document.querySelector('.status-badge').className = 'status-badge status-invalid';
+                document.querySelector('.status-badge').textContent = 'Ошибка';
+            }
+        };
+        
+        reader.readAsText(file);
+    };
+    
+    input.click();
+}
+
+/**
+ * Сохранить файл
+ */
+function saveFile() {
+    try {
+        // Генерируем XML
+        const xmlString = parser.generateXML(currentIDS);
+        
+        // Создаем blob для скачивания
+        const blob = new Blob([xmlString], { type: 'application/xml' });
+        const url = URL.createObjectURL(blob);
+        
+        // Создаем ссылку для скачивания
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = document.querySelector('.filename').value || 'specification.ids';
+        a.click();
+        
+        // Очищаем URL
+        URL.revokeObjectURL(url);
+        
+    } catch (error) {
+        alert('Ошибка при сохранении: ' + error.message);
+    }
+}
+
+/**
+ * Обновить информацию о файле из currentIDS
+ */
+function updateInfoFromCurrent() {
+    document.getElementById('infoTitle').value = currentIDS.info.title || '';
+    document.getElementById('infoAuthor').value = currentIDS.info.author || '';
+    document.getElementById('infoIfcVersion').value = currentIDS.info.version || 'IFC4';
+    document.getElementById('infoDate').value = currentIDS.info.date || new Date().toISOString().split('T')[0];
+    document.getElementById('infoCopyright').value = currentIDS.info.copyright || 'Пользователь';
+}
+
+/**
+ * Обновить currentIDS из формы
+ */
+function updateInfoFromForm() {
+    currentIDS.info.title = document.getElementById('infoTitle').value;
+    currentIDS.info.author = document.getElementById('infoAuthor').value;
+    currentIDS.info.version = document.getElementById('infoIfcVersion').value;
+    currentIDS.info.date = document.getElementById('infoDate').value;
+    currentIDS.info.copyright = document.getElementById('infoCopyright').value;
+    
+    // Обновляем имя в шапке
+    document.querySelector('.filename').value = currentIDS.info.title;
+}
+
+/**
+ * Добавить новую спецификацию
+ */
+function addNewSpecification() {
+    const newSpec = {
+        id: `spec_${Date.now()}`,
+        name: `Новая спецификация ${currentIDS.specifications.length + 1}`,
+        ifcVersion: 'IFC4',
+        applicability: {
+            rules: [
+                {
+                    type: 'entity',
+                    field: 'name',
+                    condition: 'equals',
+                    value: 'IfcWall',
+                    displayType: 'Сущность IFC'
+                }
+            ]
+        },
+        requirements: {
+            rules: []
+        }
+    };
+    
+    currentIDS.specifications.push(newSpec);
+    renderSpecifications();
+    
+    // Выделяем новую спецификацию для редактирования
+    selectSpecification(newSpec.id);
+}
+
+// js/app.js (продолжение)
+
+/**
+ * Отрисовывает список спецификаций
+ */
+function renderSpecifications() {
+    const specList = document.getElementById('specList');
+    const template = document.getElementById('specTemplate');
+    
+    // Очищаем список
+    specList.innerHTML = '';
+    
+    if (currentIDS.specifications.length === 0) {
+        // Показываем заглушку, если нет спецификаций
+        const emptyState = document.createElement('div');
+        emptyState.className = 'empty-state';
+        emptyState.innerHTML = `
+            <p>Нет спецификаций</p>
+            <small>Нажмите "+ Добавить спецификацию" чтобы создать первую</small>
+        `;
+        specList.appendChild(emptyState);
+        return;
+    }
+    
+    // Отрисовываем каждую спецификацию
+    currentIDS.specifications.forEach(spec => {
+        const specCard = document.importNode(template.content, true).querySelector('.spec-card');
+        
+        // Заполняем данные
+        const nameInput = specCard.querySelector('.spec-name');
+        nameInput.value = spec.name;
+        
+        // Считаем количество правил
+        const rulesCount = (spec.applicability?.rules?.length || 0) + 
+                          (spec.requirements?.rules?.length || 0);
+        
+        const entityValue = specCard.querySelector('.entity-value');
+        // Ищем первое entity правило для предпросмотра
+        const entityRule = spec.applicability?.rules?.find(r => r.type === 'entity');
+        entityValue.textContent = entityRule ? entityRule.value : 'Нет сущности';
+        
+        const specCount = specCard.querySelector('.spec-count');
+        specCount.textContent = `${rulesCount} ${getRulesWord(rulesCount)}`;
+        
+        // Добавляем data-id для идентификации
+        specCard.dataset.specId = spec.id;
+        
+        // Подсвечиваем, если выбрана
+        if (spec.id === selectedSpecId) {
+            specCard.classList.add('selected');
+        }
+        
+        // Обработчики событий
+        setupSpecCardHandlers(specCard, spec);
+        
+        specList.appendChild(specCard);
+    });
+}
+
+/**
+ * Возвращает правильное склонение слова "правило"
+ */
+function getRulesWord(count) {
+    if (count === 0) return 'правил';
+    if (count === 1) return 'правило';
+    if (count >= 2 && count <= 4) return 'правила';
+    return 'правил';
+}
+
+/**
+ * Настраивает обработчики для карточки спецификации
+ */
+function setupSpecCardHandlers(card, spec) {
+    // Клик по карточке для выбора
+    card.addEventListener('click', (e) => {
+        // Не выделяем, если клик по инпуту или кнопкам
+        if (e.target.tagName === 'INPUT' || e.target.closest('.icon-btn')) {
+            return;
+        }
+        selectSpecification(spec.id);
+    });
+    
+    // Редактирование имени
+    const nameInput = card.querySelector('.spec-name');
+    nameInput.addEventListener('change', (e) => {
+        spec.name = e.target.value;
+        // Обновляем имя в редакторе, если эта спецификация выбрана
+        if (selectedSpecId === spec.id) {
+            document.getElementById('selectedSpecName').textContent = spec.name;
+        }
+    });
+    
+    // Кнопка редактирования
+    card.querySelector('.edit-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectSpecification(spec.id);
+    });
+    
+    // Кнопка дублирования
+    card.querySelector('.duplicate-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        duplicateSpecification(spec);
+    });
+    
+    // Кнопка удаления
+    card.querySelector('.delete-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        deleteSpecification(spec.id);
+    });
+}
+
+/**
+ * Выбрать спецификацию для редактирования
+ */
+function selectSpecification(specId) {
+    selectedSpecId = specId;
+    
+    // Обновляем выделение в списке
+    document.querySelectorAll('.spec-card').forEach(card => {
+        if (card.dataset.specId === specId) {
+            card.classList.add('selected');
+        } else {
+            card.classList.remove('selected');
+        }
+    });
+    
+    // Находим спецификацию
+    const spec = currentIDS.specifications.find(s => s.id === specId);
+    if (spec) {
+        // Обновляем заголовок редактора
+        document.getElementById('selectedSpecName').textContent = spec.name;
+        
+        // Отрисовываем редактор правил
+        renderSpecEditor(spec);
+    }
+}
+
+/**
+ * Дублировать спецификацию
+ */
+function duplicateSpecification(spec) {
+    // Создаем копию с новым id
+    const newSpec = JSON.parse(JSON.stringify(spec));
+    newSpec.id = `spec_${Date.now()}`;
+    newSpec.name = `${spec.name} (копия)`;
+    
+    currentIDS.specifications.push(newSpec);
+    renderSpecifications();
+}
+
+/**
+ * Удалить спецификацию
+ */
+function deleteSpecification(specId) {
+    if (confirm('Удалить спецификацию?')) {
+        currentIDS.specifications = currentIDS.specifications.filter(s => s.id !== specId);
+        
+        if (selectedSpecId === specId) {
+            selectedSpecId = null;
+            document.getElementById('selectedSpecName').textContent = 'Не выбрано';
+            document.getElementById('editorContent').innerHTML = '<p class="placeholder">Выберите спецификацию для редактирования</p>';
+        }
+        
+        renderSpecifications();
+    }
+}
+
+// js/app.js (продолжение)
+
+/**
+ * Отрисовывает редактор для выбранной спецификации
+ */
+function renderSpecEditor(spec) {
+    const editorContent = document.getElementById('editorContent');
+    
+    // Создаем структуру редактора
+    let html = `
+        <div class="editor-tabs">
+            <button class="editor-tab active" data-tab="applicability">Применимость</button>
+            <button class="editor-tab" data-tab="requirements">Требования</button>
+        </div>
+        
+        <div id="applicability-tab" class="tab-content">
+            <div class="editor-section">
+                <div class="section-title">Условия отбора (applicability)</div>
+                <div id="applicability-rules" class="rules-container">
+    `;
+    
+    // Добавляем правила applicability
+    if (spec.applicability?.rules?.length > 0) {
+        spec.applicability.rules.forEach((rule, index) => {
+            html += renderApplicabilityRule(rule, index);
+        });
+    } else {
+        html += `<p class="placeholder">Нет правил применимости</p>`;
+    }
+    
+    html += `
+                </div>
+                <button class="add-condition" onclick="addApplicabilityRule('${spec.id}')">
+                    + Добавить условие отбора
+                </button>
+            </div>
+        </div>
+        
+        <div id="requirements-tab" class="tab-content" style="display: none;">
+            <div class="editor-section">
+                <div class="section-title">Требования к свойствам</div>
+                <div id="requirements-rules" class="rules-container">
+    `;
+    
+    // Добавляем правила requirements
+    if (spec.requirements?.rules?.length > 0) {
+        spec.requirements.rules.forEach((rule, index) => {
+            html += renderRequirementsRule(rule, index);
+        });
+    } else {
+        html += `<p class="placeholder">Нет требований</p>`;
+    }
+    
+    html += `
+                </div>
+                <button class="add-condition" onclick="addRequirementRule('${spec.id}')">
+                    + Добавить требование
+                </button>
+            </div>
+        </div>
+        
+        <div class="editor-actions">
+            <button class="btn-block" onclick="testSpecification('${spec.id}')">
+                🔍 Проверить на тестовой модели
+            </button>
+            <button class="btn-block btn-danger" onclick="clearSpecification('${spec.id}')">
+                🗑️ Очистить правила
+            </button>
+        </div>
+    `;
+    
+    editorContent.innerHTML = html;
+    
+    // Добавляем обработчики для переключения вкладок
+    setupTabHandlers(spec.id);
+}
+
+/**
+ * Отрисовывает одно правило applicability
+ */
+function renderApplicabilityRule(rule, index) {
+    let conditionOptions = getConditionOptions(rule.type);
+    
+    return `
+        <div class="rule-card" data-rule-type="applicability" data-rule-index="${index}">
+            <div class="rule-card-header">
+                <span class="rule-type-badge">${rule.displayType || 'Правило'}</span>
+                <button class="icon-btn" onclick="removeRule('${rule.id || 'new'}')" title="Удалить">✕</button>
+            </div>
+            <div class="rule-fields">
+                <div class="rule-field">
+                    <label>Тип правила</label>
+                    <select onchange="changeRuleType(this, 'applicability', ${index})">
+                        <option value="entity" ${rule.type === 'entity' ? 'selected' : ''}>Сущность IFC</option>
+                        <option value="attribute" ${rule.type === 'attribute' ? 'selected' : ''}>Атрибут</option>
+                        <option value="property" ${rule.type === 'property' ? 'selected' : ''}>Свойство</option>
+                    </select>
+                </div>
+                <div class="rule-field">
+                    <label>Поле</label>
+                    <input type="text" value="${rule.field || ''}" placeholder="Например: Name" 
+                           onchange="updateRuleField(this, 'applicability', ${index})">
+                </div>
+                <div class="rule-field">
+                    <label>Условие</label>
+                    <select onchange="updateRuleCondition(this, 'applicability', ${index})">
+                        ${conditionOptions}
+                    </select>
+                </div>
+                <div class="rule-field">
+                    <label>Значение</label>
+                    ${renderValueInput(rule)}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * Отрисовывает одно правило requirements
+ */
+function renderRequirementsRule(rule, index) {
+    let cardinalityOptions = `
+        <option value="required" ${rule.cardinality === 'Обязательно' || rule.cardinality === 'required' ? 'selected' : ''}>Обязательно</option>
+        <option value="optional" ${rule.cardinality === 'Опционально' || rule.cardinality === 'optional' ? 'selected' : ''}>Опционально</option>
+        <option value="prohibited" ${rule.cardinality === 'Запрещено' || rule.cardinality === 'prohibited' ? 'selected' : ''}>Запрещено</option>
+    `;
+    
+    let dataTypeOptions = '';
+    // Здесь мы заполним типы данных позже, когда загрузим JSON
+    
+    return `
+        <div class="rule-card" data-rule-type="requirements" data-rule-index="${index}">
+            <div class="rule-card-header">
+                <span class="rule-type-badge">Свойство</span>
+                <select class="rule-cardinality ${getCardinalityClass(rule.cardinality)}" 
+                        onchange="updateCardinality(this, ${index})">
+                    ${cardinalityOptions}
+                </select>
+            </div>
+            <div class="rule-fields">
+                <div class="rule-field">
+                    <label>PropertySet</label>
+                    <input type="text" value="${rule.propertySet || ''}" placeholder="Например: ExpCheck_Wall"
+                           onchange="updatePropertySet(this, ${index})">
+                </div>
+                <div class="rule-field">
+                    <label>Имя свойства</label>
+                    <input type="text" value="${rule.field || ''}" placeholder="Например: MGE_ElementCode"
+                           onchange="updateRuleField(this, 'requirements', ${index})">
+                </div>
+                <div class="rule-field">
+                    <label>Тип данных</label>
+                    <select onchange="updateDataType(this, ${index})">
+                        <option value="IFCTEXT">Текст (строка)</option>
+                        <option value="IFCINTEGER">Целое число</option>
+                        <option value="IFCREAL">Дробное число</option>
+                        <option value="IFCBOOLEAN">Да/Нет</option>
+                    </select>
+                </div>
+                <div class="rule-field">
+                    <label>Условие</label>
+                    <select onchange="updateRuleCondition(this, 'requirements', ${index})">
+                        <option value="equals" ${rule.condition === 'equals' ? 'selected' : ''}>Равно</option>
+                        <option value="startsWith" ${rule.condition === 'startsWith' ? 'selected' : ''}>Начинается с</option>
+                        <option value="contains" ${rule.condition === 'contains' ? 'selected' : ''}>Содержит</option>
+                        <option value="endsWith" ${rule.condition === 'endsWith' ? 'selected' : ''}>Заканчивается на</option>
+                        <option value="in" ${rule.condition === 'in' ? 'selected' : ''}>Одно из списка</option>
+                    </select>
+                </div>
+                <div class="rule-field">
+                    <label>Значение</label>
+                    ${renderValueInput(rule)}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * Отрисовывает поле ввода значения в зависимости от типа условия
+ */
+function renderValueInput(rule) {
+    if (rule.condition === 'in' && Array.isArray(rule.value)) {
+        // Для перечислений показываем список
+        let valuesHtml = '<div class="values-list">';
+        rule.value.forEach((val, idx) => {
+            valuesHtml += `
+                <div class="value-item">
+                    <input type="text" value="${val}" 
+                           onchange="updateEnumValue(this, ${idx})">
+                    <button class="remove-value" onclick="removeEnumValue(${idx})">✕</button>
+                </div>
+            `;
+        });
+        valuesHtml += '</div>';
+        valuesHtml += '<button class="add-value" onclick="addEnumValue()">+ Добавить значение</button>';
+        return valuesHtml;
+    } else {
+        // Обычное текстовое поле
+        return `<input type="text" class="value-input" value="${rule.value || ''}" 
+                       placeholder="Значение" onchange="updateRuleValue(this)">`;
+    }
+}
+
+/**
+ * Возвращает опции для условия в зависимости от типа правила
+ */
+function getConditionOptions(ruleType) {
+    if (ruleType === 'entity') {
+        // Для сущностей обычно только равенство
+        return `
+            <option value="equals" selected>Равно</option>
+        `;
+    } else {
+        // Для атрибутов и свойств - разные условия
+        return `
+            <option value="equals">Равно</option>
+            <option value="startsWith">Начинается с</option>
+            <option value="contains">Содержит</option>
+            <option value="endsWith">Заканчивается на</option>
+            <option value="in">Одно из списка</option>
+        `;
+    }
+}
+
+/**
+ * Возвращает класс для кардинальности
+ */
+function getCardinalityClass(cardinality) {
+    if (cardinality === 'Обязательно' || cardinality === 'required') {
+        return 'cardinality-required';
+    } else if (cardinality === 'Опционально' || cardinality === 'optional') {
+        return 'cardinality-optional';
+    }
+    return '';
+}
+
+// js/app.js (продолжение)
+
+/**
+ * Настраивает обработчики вкладок
+ */
+function setupTabHandlers(specId) {
+    const tabs = document.querySelectorAll('.editor-tab');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Убираем активный класс у всех вкладок
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            // Прячем все содержимое вкладок
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Показываем выбранную вкладку
+            const tabName = tab.dataset.tab;
+            document.getElementById(`${tabName}-tab`).style.display = 'block';
+        });
+    });
+}
+
+/**
+ * Добавить правило applicability
+ */
+function addApplicabilityRule(specId) {
+    const spec = currentIDS.specifications.find(s => s.id === specId);
+    if (!spec) return;
+    
+    if (!spec.applicability) {
+        spec.applicability = { rules: [] };
+    }
+    
+    // Добавляем новое правило по умолчанию
+    spec.applicability.rules.push({
+        type: 'entity',
+        field: 'name',
+        condition: 'equals',
+        value: 'IfcWall',
+        displayType: 'Сущность IFC'
+    });
+    
+    // Перерисовываем редактор
+    renderSpecEditor(spec);
+}
+
+/**
+ * Добавить правило requirements
+ */
+function addRequirementRule(specId) {
+    const spec = currentIDS.specifications.find(s => s.id === specId);
+    if (!spec) return;
+    
+    if (!spec.requirements) {
+        spec.requirements = { rules: [] };
+    }
+    
+    // Добавляем новое правило по умолчанию
+    spec.requirements.rules.push({
+        type: 'property',
+        field: '',
+        propertySet: '',
+        dataType: 'IFCTEXT',
+        cardinality: 'optional',
+        condition: 'equals',
+        value: '',
+        displayType: 'Свойство'
+    });
+    
+    // Перерисовываем редактор
+    renderSpecEditor(spec);
+}
+
+/**
+ * Обновить поле правила
+ */
+function updateRuleField(input, ruleType, index) {
+    const spec = currentIDS.specifications.find(s => s.id === selectedSpecId);
+    if (!spec) return;
+    
+    const rules = ruleType === 'applicability' ? spec.applicability.rules : spec.requirements.rules;
+    if (rules[index]) {
+        rules[index].field = input.value;
+    }
+}
+
+/**
+ * Обновить условие правила
+ */
+function updateRuleCondition(select, ruleType, index) {
+    const spec = currentIDS.specifications.find(s => s.id === selectedSpecId);
+    if (!spec) return;
+    
+    const rules = ruleType === 'applicability' ? spec.applicability.rules : spec.requirements.rules;
+    if (rules[index]) {
+        const oldCondition = rules[index].condition;
+        const newCondition = select.value;
+        rules[index].condition = newCondition;
+        
+        // Если переключились на 'in' и значение не массив - преобразуем
+        if (newCondition === 'in' && !Array.isArray(rules[index].value)) {
+            rules[index].value = rules[index].value ? [rules[index].value] : [];
+        }
+        
+        // Если переключились с 'in' на что-то другое - берем первый элемент
+        if (oldCondition === 'in' && newCondition !== 'in' && Array.isArray(rules[index].value)) {
+            rules[index].value = rules[index].value[0] || '';
+        }
+        
+        // Перерисовываем редактор для обновления поля ввода
+        renderSpecEditor(spec);
+    }
+}
+
+/**
+ * Обновить значение правила
+ */
+function updateRuleValue(input) {
+    const spec = currentIDS.specifications.find(s => s.id === selectedSpecId);
+    if (!spec) return;
+    
+    // Определяем, какое правило редактируется (сложно без контекста, упростим)
+    // В реальном приложении нужно передавать больше контекста
+    console.warn('updateRuleValue требует доработки - нужно знать индекс');
+}
+
+/**
+ * Обновить кардинальность
+ */
+function updateCardinality(select, index) {
+    const spec = currentIDS.specifications.find(s => s.id === selectedSpecId);
+    if (!spec || !spec.requirements?.rules[index]) return;
+    
+    spec.requirements.rules[index].cardinality = select.value;
+}
+
+/**
+ * Обновить PropertySet
+ */
+function updatePropertySet(input, index) {
+    const spec = currentIDS.specifications.find(s => s.id === selectedSpecId);
+    if (!spec || !spec.requirements?.rules[index]) return;
+    
+    spec.requirements.rules[index].propertySet = input.value;
+}
+
+/**
+ * Обновить тип данных
+ */
+function updateDataType(select, index) {
+    const spec = currentIDS.specifications.find(s => s.id === selectedSpecId);
+    if (!spec || !spec.requirements?.rules[index]) return;
+    
+    spec.requirements.rules[index].dataType = select.value;
+}
+
+/**
+ * Удалить правило
+ */
+function removeRule(ruleId) {
+    // Временная заглушка
+    if (confirm('Удалить правило?')) {
+        console.log('Удаление правила', ruleId);
+        // В реальном приложении нужно найти и удалить правило
+    }
+}
+
+/**
+ * Тестировать спецификацию на модели
+ */
+function testSpecification(specId) {
+    alert('Функция проверки на IFC-модели будет добавлена позже');
+}
+
+/**
+ * Очистить правила спецификации
+ */
+function clearSpecification(specId) {
+    if (confirm('Очистить все правила?')) {
+        const spec = currentIDS.specifications.find(s => s.id === specId);
+        if (spec) {
+            spec.applicability = { rules: [] };
+            spec.requirements = { rules: [] };
+            renderSpecEditor(spec);
+            renderSpecifications(); // Обновляем счетчики в карточках
+        }
+    }
+}
+
+/**
+ * Загрузить пример файла (для тестирования)
+ */
+function loadExampleFile(filename) {
+    fetch(filename)
+        .then(response => response.text())
+        .then(xmlString => {
+            const parsed = parser.parse(xmlString);
+            currentIDS = parsed;
+            document.querySelector('.filename').value = filename.split('/').pop();
+            updateInfoFromCurrent();
+            renderSpecifications();
+        })
+        .catch(error => {
+            console.error('Ошибка загрузки примера:', error);
+        });
+}

@@ -1,0 +1,104 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDS Editor - Редактор спецификаций IFC</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Шапка: управление файлом -->
+        <header class="header">
+            <div class="file-info">
+                <input type="text" class="filename" value="Без имени.ids" placeholder="Название файла">
+                <span class="status-badge status-valid">Валидно</span>
+            </div>
+            <div class="file-actions">
+                <button class="btn btn-primary" id="newFile">✨ Создать</button>
+                <button class="btn btn-secondary" id="openFile">📂 Открыть</button>
+                <button class="btn btn-success" id="saveFile">💾 Сохранить</button>
+            </div>
+        </header>
+
+        <!-- Основной контейнер -->
+        <div class="main-container">
+            <!-- Левая панель: информация о файле -->
+            <aside class="info-panel">
+                <h3>Информация о файле</h3>
+                <div class="info-form">
+                    <div class="form-group">
+                        <label>Название</label>
+                        <input type="text" id="infoTitle" value="Сгенерированная проверка">
+                    </div>
+                    <div class="form-group">
+                        <label>Автор</label>
+                        <input type="email" id="infoAuthor" value="user@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Версия IFC</label>
+                        <select id="infoIfcVersion">
+                            <option value="IFC4" selected>IFC4</option>
+                            <option value="IFC4x3">IFC4x3</option>
+                            <option value="IFC2x3">IFC2x3</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Дата</label>
+                        <input type="date" id="infoDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Копирайт</label>
+                        <input type="text" id="infoCopyright" value="Пользователь">
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Центральная панель: список спецификаций -->
+            <main class="spec-panel">
+                <div class="panel-header">
+                    <h2>Спецификации</h2>
+                    <button class="btn btn-primary btn-small" id="addSpec">+ Добавить спецификацию</button>
+                </div>
+                <div class="spec-list" id="specList">
+                    <!-- Сюда будут добавляться карточки спецификаций -->
+                </div>
+            </main>
+
+            <!-- Правая панель: редактор правил -->
+            <aside class="editor-panel" id="editorPanel">
+                <div class="panel-header">
+                    <h3>Редактор правил</h3>
+                    <span class="badge" id="selectedSpecName">Не выбрано</span>
+                </div>
+                <div class="editor-content" id="editorContent">
+                    <p class="placeholder">Выберите спецификацию для редактирования</p>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Шаблон для спецификации (будем использовать для клонирования) -->
+    <template id="specTemplate">
+        <div class="spec-card">
+            <div class="spec-header">
+                <input type="text" class="spec-name" value="Новая спецификация">
+                <div class="spec-actions">
+                    <button class="icon-btn edit-btn" title="Редактировать">✏️</button>
+                    <button class="icon-btn duplicate-btn" title="Дублировать">📋</button>
+                    <button class="icon-btn delete-btn" title="Удалить">🗑️</button>
+                </div>
+            </div>
+            <div class="spec-preview">
+                <span class="spec-badge">Сущность: <span class="entity-value">IfcWall</span></span>
+                <span class="spec-count">2 правила</span>
+            </div>
+        </div>
+    </template>
+
+    <script src="js/ids-parser.js"></script>
+    <script src="js/ids-generator.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

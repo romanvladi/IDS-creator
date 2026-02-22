@@ -1,0 +1,13 @@
+{
+  "IFCTEXT": "Текст (строка)",
+  "IFCLABEL": "Метка (короткий текст)",
+  "IFCBOOLEAN": "Да/Нет (булево)",
+  "IFCINTEGER": "Целое число",
+  "IFCREAL": "Дробное число",
+  "IFCLENGTHMEASURE": "Длина (мм)",
+  "IFCAREAMEASURE": "Площадь (м²)",
+  "IFCVOLUMEMEASURE": "Объем (м³)",
+  "IFCIDENTIFIER": "Идентификатор",
+  "IFCTIMESTAMP": "Дата/время",
+  "IFCURIREFERENCE": "Ссылка/URI"
+}

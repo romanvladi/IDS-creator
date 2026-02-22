@@ -1,0 +1,15 @@
+{
+  "IfcWall": "Стена",
+  "IfcWallStandardCase": "Стена (типовая)",
+  "IfcColumn": "Колонна",
+  "IfcBeam": "Балка",
+  "IfcSlab": "Перекрытие",
+  "IfcDoor": "Дверь",
+  "IfcWindow": "Окно",
+  "IfcRoof": "Крыша",
+  "IfcStair": "Лестница",
+  "IfcRamp": "Пандус",
+  "IfcFooting": "Фундамент",
+  "IfcPile": "Свая",
+  "IfcBuildingElementProxy": "Общий элемент"
+}

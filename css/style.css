@@ -587,3 +587,134 @@ body {
 .btn-danger:hover {
     background: #ffcecb;
 }
+
+/* ===== Растягиваемая правая панель ===== */
+
+/* Обновляем main-container для поддержки растягивания */
+.main-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Левая панель - фиксированная ширина */
+.info-panel {
+    width: 280px;
+    background: white;
+    border-right: 1px solid #e1e4e8;
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex-shrink: 0; /* Запрещаем сжиматься */
+}
+
+/* Центральная панель - занимает оставшееся место */
+.spec-panel {
+    flex: 1; /* Растягивается на все доступное место */
+    background: #f5f7fa;
+    display: flex;
+    flex-direction: column;
+    min-width: 250px; /* Минимальная ширина */
+    overflow: hidden;
+}
+
+/* Разделитель */
+.splitter {
+    width: 8px;
+    background: #f0f0f0;
+    cursor: col-resize;
+    transition: background 0.2s;
+    position: relative;
+    z-index: 10;
+    flex-shrink: 0; /* Запрещаем сжиматься */
+}
+
+.splitter:hover,
+.splitter:active {
+    background: #0969da;
+}
+
+.splitter::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 30px;
+    background: #c0c0c0;
+    border-radius: 2px;
+    transition: background 0.2s;
+}
+
+.splitter:hover::after,
+.splitter:active::after {
+    background: white;
+}
+
+/* Правая панель - изначальная ширина, но можно менять */
+.editor-panel {
+    width: 400px; /* Начальная ширина */
+    min-width: 300px; /* Минимальная ширина */
+    max-width: 800px; /* Максимальная ширина */
+    background: white;
+    border-left: 1px solid #e1e4e8;
+    display: flex;
+    flex-direction: column;
+    transition: none; /* Убираем transition для плавного ресайза */
+    flex-shrink: 0; /* Запрещаем сжиматься */
+    resize: horizontal; /* Альтернативный вариант, но мы сделаем через JS */
+}
+
+/* Когда идет ресайз - меняем курсор для всего контейнера */
+.main-container.resizing {
+    cursor: col-resize;
+    user-select: none; /* Запрещаем выделение текста во время ресайза */
+}
+
+.main-container.resizing .editor-panel,
+.main-container.resizing .splitter {
+    transition: none; /* Убираем все анимации во время ресайза */
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .splitter {
+        display: none; /* Прячем разделитель на мобильных */
+    }
+    
+    .editor-panel {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 100;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    }
+    
+    .main-container.resizing .editor-panel {
+        position: absolute; /* Сохраняем позиционирование при ресайзе */
+    }
+}
+
+/* Индикатор ширины (опционально) */
+.editor-panel::before {
+    content: attr(data-width);
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 0.7rem;
+    color: #8c959f;
+    background: rgba(255,255,255,0.8);
+    padding: 2px 6px;
+    border-radius: 10px;
+    border: 1px solid #e1e4e8;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.editor-panel:hover::before {
+    opacity: 1;
+}

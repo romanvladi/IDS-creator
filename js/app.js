@@ -836,3 +836,235 @@ function loadExampleFile(filename) {
             console.error('Ошибка загрузки примера:', error);
         });
 }
+
+// ===== ШАГ 11: Растягиваемая правая панель =====
+
+let isResizing = false;
+let startX = 0;
+let startWidth = 0;
+let editorPanel = null;
+let splitter = null;
+let mainContainer = null;
+
+/**
+ * Инициализация растягиваемой панели
+ */
+function initResizablePanel() {
+    editorPanel = document.getElementById('editorPanel');
+    splitter = document.getElementById('splitter');
+    mainContainer = document.querySelector('.main-container');
+    
+    if (!splitter || !editorPanel) return;
+    
+    // Загружаем сохраненную ширину из localStorage
+    loadSavedPanelWidth();
+    
+    // Обработчики мыши для разделителя
+    splitter.addEventListener('mousedown', startResize);
+    
+    // Глобальные обработчики для завершения ресайза
+    document.addEventListener('mousemove', onResize);
+    document.addEventListener('mouseup', stopResize);
+    
+    // Опционально: двойной клик для сброса ширины
+    splitter.addEventListener('dblclick', resetPanelWidth);
+    
+    // Сохраняем ширину при закрытии вкладки
+    window.addEventListener('beforeunload', savePanelWidth);
+}
+
+/**
+ * Начало ресайза
+ */
+function startResize(e) {
+    e.preventDefault(); // Предотвращаем выделение текста
+    
+    isResizing = true;
+    startX = e.clientX;
+    startWidth = editorPanel.offsetWidth;
+    
+    // Добавляем класс для изменения курсора
+    mainContainer.classList.add('resizing');
+    
+    // Временное отключение transition для плавности
+    editorPanel.style.transition = 'none';
+    
+    // Опционально: показываем текущую ширину
+    showResizeIndicator();
+}
+
+/**
+ * Процесс ресайза
+ */
+function onResize(e) {
+    if (!isResizing) return;
+    
+    e.preventDefault();
+    
+    // Вычисляем разницу движения мыши
+    const deltaX = startX - e.clientX; // Отрицательное значение при движении вправо
+    
+    // Новая ширина (начальная ширина + разница)
+    let newWidth = startWidth + deltaX;
+    
+    // Ограничиваем ширину min/max
+    const minWidth = 300; // Минимальная ширина
+    const maxWidth = 800; // Максимальная ширина
+    
+    newWidth = Math.min(Math.max(newWidth, minWidth), maxWidth);
+    
+    // Применяем новую ширину
+    editorPanel.style.width = `${newWidth}px`;
+    
+    // Обновляем атрибут с текущей шириной
+    editorPanel.setAttribute('data-width', `${Math.round(newWidth)}px`);
+}
+
+/**
+ * Остановка ресайза
+ */
+function stopResize() {
+    if (!isResizing) return;
+    
+    isResizing = false;
+    
+    // Убираем класс ресайза
+    mainContainer.classList.remove('resizing');
+    
+    // Восстанавливаем transition
+    editorPanel.style.transition = '';
+    
+    // Сохраняем ширину
+    savePanelWidth();
+    
+    // Прячем индикатор
+    hideResizeIndicator();
+}
+
+/**
+ * Сброс ширины панели к значению по умолчанию
+ */
+function resetPanelWidth() {
+    if (!editorPanel) return;
+    
+    const defaultWidth = 400;
+    editorPanel.style.width = `${defaultWidth}px`;
+    editorPanel.setAttribute('data-width', `${defaultWidth}px`);
+    
+    // Сохраняем новую ширину
+    savePanelWidth();
+}
+
+/**
+ * Сохранить ширину панели в localStorage
+ */
+function savePanelWidth() {
+    if (!editorPanel) return;
+    
+    const width = editorPanel.offsetWidth;
+    localStorage.setItem('editorPanelWidth', width);
+}
+
+/**
+ * Загрузить сохраненную ширину панели
+ */
+function loadSavedPanelWidth() {
+    if (!editorPanel) return;
+    
+    const savedWidth = localStorage.getItem('editorPanelWidth');
+    if (savedWidth) {
+        const width = parseInt(savedWidth, 10);
+        // Проверяем, что ширина в допустимых пределах
+        const minWidth = 300;
+        const maxWidth = 800;
+        if (width >= minWidth && width <= maxWidth) {
+            editorPanel.style.width = `${width}px`;
+            editorPanel.setAttribute('data-width', `${width}px`);
+        }
+    }
+}
+
+/**
+ * Показать индикатор ресайза
+ */
+function showResizeIndicator() {
+    // Можно добавить всплывающую подсказку с текущей шириной
+    if (!editorPanel) return;
+    
+    // Создаем индикатор, если его нет
+    let indicator = document.querySelector('.resize-indicator');
+    if (!indicator) {
+        indicator = document.createElement('div');
+        indicator.className = 'resize-indicator';
+        document.body.appendChild(indicator);
+    }
+    
+    // Обновляем и показываем
+    indicator.textContent = `${editorPanel.offsetWidth}px`;
+    indicator.style.display = 'block';
+    
+    // Позиционируем около курсора
+    // Будет обновляться в onResize
+}
+
+/**
+ * Обновить индикатор ресайза
+ */
+function updateResizeIndicator(e) {
+    const indicator = document.querySelector('.resize-indicator');
+    if (indicator && editorPanel) {
+        indicator.textContent = `${editorPanel.offsetWidth}px`;
+        indicator.style.left = `${e.clientX + 20}px`;
+        indicator.style.top = `${e.clientY - 40}px`;
+    }
+}
+
+/**
+ * Спрятать индикатор ресайза
+ */
+function hideResizeIndicator() {
+    const indicator = document.querySelector('.resize-indicator');
+    if (indicator) {
+        indicator.style.display = 'none';
+    }
+}
+
+// Добавляем стили для индикатора ресайза (можно добавить в CSS)
+const resizeIndicatorStyles = `
+.resize-indicator {
+    position: fixed;
+    background: #0969da;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 10000;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: none;
+}
+`;
+
+// Добавляем стили в head
+const styleSheet = document.createElement("style");
+styleSheet.textContent = resizeIndicatorStyles;
+document.head.appendChild(styleSheet);
+
+// Переопределяем onResize для обновления индикатора
+const originalOnResize = onResize;
+onResize = function(e) {
+    originalOnResize(e);
+    if (isResizing) {
+        updateResizeIndicator(e);
+    }
+};
+
+// Инициализируем при загрузке страницы
+// Добавляем вызов в существующий DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    // ... существующий код инициализации ...
+    
+    // Добавляем инициализацию растягиваемой панели
+    initResizablePanel();
+});

@@ -1,0 +1,2744 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ids xsi:noNamespaceSchemaLocation="ids.xsd" xmlns="http://standards.buildingsmart.org/IDS" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <info>
+        <title>Требования по классификации элементов ЦИМ в соответствии с МССК 5.0</title>
+        <copyright>Государственное автономное учреждение города Москвы "Московская государственная экспертиза"</copyright>
+        <version>IFC4</version>
+        <author>KlimovAN@str.mos.ru</author>
+        <date>2024-10-10</date>
+    </info>
+    <specifications>
+        <specification name="1. IfcBuildingElementProxy - Прокси элемент" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcBuildingElementProxy</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_BuildingElementProxy</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 30 10"/>
+                            <xs:enumeration value="ЭЛ 30 30 20"/>
+                            <xs:enumeration value="ЭЛ 40 62 10 10"/>
+                            <xs:enumeration value="ЭЛ 40 62 10 11"/>
+                            <xs:enumeration value="ЭЛ 40 62 10 12"/>
+                            <xs:enumeration value="ЭЛ 40 62 10 13"/>
+                            <xs:enumeration value="ЭЛ 40 62 10 14"/>
+                            <xs:enumeration value="ЭЛ 50 20 20 30"/>
+                            <xs:enumeration value="ЭЛ 60 10 30 10"/>
+                            <xs:enumeration value="ЭЛ 70 60 02"/>
+                            <xs:enumeration value="ЭЛ 70 60 02 01"/>
+                            <xs:enumeration value="ЭЛ 70 60 02 02"/>
+                            <xs:enumeration value="ЭЛ 70 60 02 03"/>
+                            <xs:enumeration value="ЭЛ 70 60 02 04"/>
+                            <xs:enumeration value="ЭЛ 70 60 02 05"/>
+                            <xs:enumeration value="ЭЛ 70 60 02 06"/>
+                            <xs:enumeration value="ЭЛ 70 70 01"/>
+                            <xs:enumeration value="ЭЛ 70 70 02"/>
+                            <xs:enumeration value="ЭЛ 70 70 03"/>
+                            <xs:enumeration value="ЭЛ 91 10 01"/>
+                            <xs:enumeration value="ЭЛ 91 10 02"/>
+                            <xs:enumeration value="ЭЛ 91 10 03"/>
+                            <xs:enumeration value="ЭЛ 91 10 04"/>
+                            <xs:enumeration value="ЭЛ 91 10 05"/>
+                            <xs:enumeration value="ЭЛ 91 10 06"/>
+                            <xs:enumeration value="ЭЛ 91 10 07"/>
+                            <xs:enumeration value="ЭЛ 91 10 08"/>
+                            <xs:enumeration value="ЭЛ 91 10 09"/>
+                            <xs:enumeration value="ЭЛ 91 10 10"/>
+                            <xs:enumeration value="ЭЛ 91 10 11"/>
+                            <xs:enumeration value="ЭЛ 91 10 12"/>
+                            <xs:enumeration value="ЭЛ 91 10 13"/>
+                            <xs:enumeration value="ЭЛ 91 10 14"/>
+                            <xs:enumeration value="ЭЛ 91 10 15"/>
+                            <xs:enumeration value="ЭЛ 91 10 16"/>
+                            <xs:enumeration value="ЭЛ 91 10 17"/>
+                            <xs:enumeration value="ЭЛ 91 10 18"/>
+                            <xs:enumeration value="ЭЛ 91 10 19"/>
+                            <xs:enumeration value="ЭЛ 91 10 20"/>
+                            <xs:enumeration value="ЭЛ 91 10 21"/>
+                            <xs:enumeration value="ЭЛ 91 10 22"/>
+                            <xs:enumeration value="ЭЛ 91 10 23"/>
+                            <xs:enumeration value="ЭЛ 91 10 24"/>
+                            <xs:enumeration value="ЭЛ 91 10 25"/>
+                            <xs:enumeration value="ЭЛ 91 10 26"/>
+                            <xs:enumeration value="ЭЛ 91 20"/>
+                            <xs:enumeration value="ЭЛ 91 20 01"/>
+                            <xs:enumeration value="ЭЛ 91 20 02"/>
+                            <xs:enumeration value="ЭЛ 91 20 03"/>
+                            <xs:enumeration value="ЭЛ 91 20 04"/>
+                            <xs:enumeration value="ЭЛ 91 30"/>
+                            <xs:enumeration value="ЭЛ 91 30 01"/>
+                            <xs:enumeration value="ЭЛ 91 30 02"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="2. IfcWall - Стена, перегородка" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcWall</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Wall</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 10 20 10"/>
+                            <xs:enumeration value="ЭЛ 10 20 40"/>
+                            <xs:enumeration value="ЭЛ 10 20 50"/>
+                            <xs:enumeration value="ЭЛ 20 20 05"/>
+                            <xs:enumeration value="ЭЛ 20 20 06"/>
+                            <xs:enumeration value="ЭЛ 30 10 15"/>
+                            <xs:enumeration value="ЭЛ 30 10 20"/>
+                            <xs:enumeration value="ЭЛ 30 10 36"/>
+                            <xs:enumeration value="ЭЛ 30 10 75"/>
+                            <xs:enumeration value="ЭЛ 30 10 76"/>
+                            <xs:enumeration value="ЭЛ 30 10 77"/>
+                            <xs:enumeration value="ЭЛ 30 10 78"/>
+                            <xs:enumeration value="ЭЛ 30 10 79"/>
+                            <xs:enumeration value="ЭЛ 30 16 63 25"/>
+                            <xs:enumeration value="ЭЛ 30 16 63 30"/>
+                            <xs:enumeration value="ЭЛ 30 16 77"/>
+                            <xs:enumeration value="ЭЛ 30 16 78"/>
+                            <xs:enumeration value="ЭЛ 60 10 10 10"/>
+                            <xs:enumeration value="ЭЛ 60 10 10 20"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="3. IfcCovering - Отделка, изоляция" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcCovering</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Covering</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 10 30 10"/>
+                            <xs:enumeration value="ЭЛ 10 30 20"/>
+                            <xs:enumeration value="ЭЛ 10 30 30"/>
+                            <xs:enumeration value="ЭЛ 20 20 04"/>
+                            <xs:enumeration value="ЭЛ 20 20 07"/>
+                            <xs:enumeration value="ЭЛ 20 20 39"/>
+                            <xs:enumeration value="ЭЛ 20 20 55"/>
+                            <xs:enumeration value="ЭЛ 20 30 10"/>
+                            <xs:enumeration value="ЭЛ 20 30 12"/>
+                            <xs:enumeration value="ЭЛ 20 30 16"/>
+                            <xs:enumeration value="ЭЛ 20 30 17"/>
+                            <xs:enumeration value="ЭЛ 20 30 26"/>
+                            <xs:enumeration value="ЭЛ 20 30 28"/>
+                            <xs:enumeration value="ЭЛ 20 30 32"/>
+                            <xs:enumeration value="ЭЛ 20 30 36"/>
+                            <xs:enumeration value="ЭЛ 20 30 38"/>
+                            <xs:enumeration value="ЭЛ 20 30 40"/>
+                            <xs:enumeration value="ЭЛ 20 30 42"/>
+                            <xs:enumeration value="ЭЛ 20 30 46"/>
+                            <xs:enumeration value="ЭЛ 20 30 48"/>
+                            <xs:enumeration value="ЭЛ 30 10 25"/>
+                            <xs:enumeration value="ЭЛ 30 10 45"/>
+                            <xs:enumeration value="ЭЛ 30 10 46"/>
+                            <xs:enumeration value="ЭЛ 30 10 69"/>
+                            <xs:enumeration value="ЭЛ 30 10 71"/>
+                            <xs:enumeration value="ЭЛ 30 16 35"/>
+                            <xs:enumeration value="ЭЛ 30 16 36"/>
+                            <xs:enumeration value="ЭЛ 30 16 37"/>
+                            <xs:enumeration value="ЭЛ 30 19 10"/>
+                            <xs:enumeration value="ЭЛ 30 19 15"/>
+                            <xs:enumeration value="ЭЛ 30 19 26"/>
+                            <xs:enumeration value="ЭЛ 30 19 30"/>
+                            <xs:enumeration value="ЭЛ 30 19 40"/>
+                            <xs:enumeration value="ЭЛ 30 19 50"/>
+                            <xs:enumeration value="ЭЛ 30 19 70"/>
+                            <xs:enumeration value="ЭЛ 30 19 80"/>
+                            <xs:enumeration value="ЭЛ 30 26"/>
+                            <xs:enumeration value="ЭЛ 30 26 10"/>
+                            <xs:enumeration value="ЭЛ 30 26 20"/>
+                            <xs:enumeration value="ЭЛ 30 28 10"/>
+                            <xs:enumeration value="ЭЛ 30 28 20"/>
+                            <xs:enumeration value="ЭЛ 30 29 20"/>
+                            <xs:enumeration value="ЭЛ 30 29 25"/>
+                            <xs:enumeration value="ЭЛ 30 29 30"/>
+                            <xs:enumeration value="ЭЛ 30 29 35"/>
+                            <xs:enumeration value="ЭЛ 30 29 40"/>
+                            <xs:enumeration value="ЭЛ 30 29 50"/>
+                            <xs:enumeration value="ЭЛ 30 29 55"/>
+                            <xs:enumeration value="ЭЛ 30 32 10"/>
+                            <xs:enumeration value="ЭЛ 30 32 15"/>
+                            <xs:enumeration value="ЭЛ 30 32 20"/>
+                            <xs:enumeration value="ЭЛ 30 32 25"/>
+                            <xs:enumeration value="ЭЛ 30 32 30"/>
+                            <xs:enumeration value="ЭЛ 30 32 35"/>
+                            <xs:enumeration value="ЭЛ 30 32 40"/>
+                            <xs:enumeration value="ЭЛ 40 15 32"/>
+                            <xs:enumeration value="ЭЛ 40 20 60"/>
+                            <xs:enumeration value="ЭЛ 40 20 60 10"/>
+                            <xs:enumeration value="ЭЛ 40 20 60 20"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="4. IfcSlab - Плита" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcSlab</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Slab</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 10 10 12 04"/>
+                            <xs:enumeration value="ЭЛ 10 10 30 04"/>
+                            <xs:enumeration value="ЭЛ 10 10 45"/>
+                            <xs:enumeration value="ЭЛ 10 10 65"/>
+                            <xs:enumeration value="ЭЛ 10 30 40"/>
+                            <xs:enumeration value="ЭЛ 30 10 40"/>
+                            <xs:enumeration value="ЭЛ 30 10 56"/>
+                            <xs:enumeration value="ЭЛ 30 10 57"/>
+                            <xs:enumeration value="ЭЛ 30 10 58"/>
+                            <xs:enumeration value="ЭЛ 30 10 80"/>
+                            <xs:enumeration value="ЭЛ 30 16 25"/>
+                            <xs:enumeration value="ЭЛ 30 24 20"/>
+                            <xs:enumeration value="ЭЛ 30 24 50"/>
+                            <xs:enumeration value="ЭЛ 30 24 51"/>
+                            <xs:enumeration value="ЭЛ 60 20 13"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="5. IfcColumn - Колонна" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcColumn</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Column</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 16 15"/>
+                            <xs:enumeration value="ЭЛ 30 16 25"/>
+                            <xs:enumeration value="ЭЛ 30 16 40"/>
+                            <xs:enumeration value="ЭЛ 30 16 41"/>
+                            <xs:enumeration value="ЭЛ 30 16 42"/>
+                            <xs:enumeration value="ЭЛ 30 16 50"/>
+                            <xs:enumeration value="ЭЛ 30 16 51"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="6. IfcBeam - Балка, перемычка" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcBeam</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Beam</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 20 20 37"/>
+                            <xs:enumeration value="ЭЛ 20 20 46"/>
+                            <xs:enumeration value="ЭЛ 30 16 20"/>
+                            <xs:enumeration value="ЭЛ 30 16 21"/>
+                            <xs:enumeration value="ЭЛ 30 16 38"/>
+                            <xs:enumeration value="ЭЛ 30 16 45"/>
+                            <xs:enumeration value="ЭЛ 30 16 52"/>
+                            <xs:enumeration value="ЭЛ 30 16 56"/>
+                            <xs:enumeration value="ЭЛ 30 16 61"/>
+                            <xs:enumeration value="ЭЛ 30 16 62"/>
+                            <xs:enumeration value="ЭЛ 30 16 63 15"/>
+                            <xs:enumeration value="ЭЛ 30 16 63 20"/>
+                            <xs:enumeration value="ЭЛ 30 16 65"/>
+                            <xs:enumeration value="ЭЛ 30 16 81"/>
+                            <xs:enumeration value="ЭЛ 30 32 45"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 88"/>
+                            <xs:enumeration value="ЭЛ 70 70 04"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="7. IfcStair - Лестница" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcStair</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Stair</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 24 30"/>
+                            <xs:enumeration value="ЭЛ 30 24 35"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="8. IfcStairFlight - Лестничный марш" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcStairFlight</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_StairFlight</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 24 10"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="9. IfcRamp - Пандус, рампа" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcRamp</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Ramp</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 24 40"/>
+                            <xs:enumeration value="ЭЛ 30 24 60"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="10. IfcRampFlight - Подъем пандуса, подъем рампы" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcRampFlight</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_RampFlight</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 24 41"/>
+                            <xs:enumeration value="ЭЛ 30 24 42"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="11. IfcRailing - Ограждения, перила" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcRailing</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Railing</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 20 20 60"/>
+                            <xs:enumeration value="ЭЛ 30 12"/>
+                            <xs:enumeration value="ЭЛ 30 12 10"/>
+                            <xs:enumeration value="ЭЛ 30 12 20"/>
+                            <xs:enumeration value="ЭЛ 30 12 40"/>
+                            <xs:enumeration value="ЭЛ 30 12 55"/>
+                            <xs:enumeration value="ЭЛ 30 12 60"/>
+                            <xs:enumeration value="ЭЛ 30 29 10"/>
+                            <xs:enumeration value="ЭЛ 30 29 10 10"/>
+                            <xs:enumeration value="ЭЛ 30 29 10 20"/>
+                            <xs:enumeration value="ЭЛ 70 30 10"/>
+                            <xs:enumeration value="ЭЛ 70 30 11"/>
+                            <xs:enumeration value="ЭЛ 70 70 05 01"/>
+                            <xs:enumeration value="ЭЛ 70 70 05 02"/>
+                            <xs:enumeration value="ЭЛ 70 70 06 02"/>
+                            <xs:enumeration value="ЭЛ 70 70 08"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="12. IfcWindow - Окно, балконный блок" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcWindow</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Window</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 20 30 24"/>
+                            <xs:enumeration value="ЭЛ 30 18 09"/>
+                            <xs:enumeration value="ЭЛ 30 18 40"/>
+                            <xs:enumeration value="ЭЛ 30 18 52"/>
+                            <xs:enumeration value="ЭЛ 30 18 52 10"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="13. IfcDoor - Дверь, ворота, люк" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcDoor</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Door</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 18 20"/>
+                            <xs:enumeration value="ЭЛ 30 18 20 01"/>
+                            <xs:enumeration value="ЭЛ 30 18 20 02"/>
+                            <xs:enumeration value="ЭЛ 30 18 30"/>
+                            <xs:enumeration value="ЭЛ 30 18 30 10"/>
+                            <xs:enumeration value="ЭЛ 30 18 30 20"/>
+                            <xs:enumeration value="ЭЛ 30 18 30 30"/>
+                            <xs:enumeration value="ЭЛ 30 18 30 31"/>
+                            <xs:enumeration value="ЭЛ 30 18 50"/>
+                            <xs:enumeration value="ЭЛ 30 18 50 10"/>
+                            <xs:enumeration value="ЭЛ 30 18 50 20"/>
+                            <xs:enumeration value="ЭЛ 30 20 20"/>
+                            <xs:enumeration value="ЭЛ 35 01 01"/>
+                            <xs:enumeration value="ЭЛ 35 01 02"/>
+                            <xs:enumeration value="ЭЛ 40 50 27 06"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="14. IfcCurtainWall - Фасад, витраж" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcCurtainWall</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_CurtainWall</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 10 10"/>
+                            <xs:enumeration value="ЭЛ 30 10 35"/>
+                            <xs:enumeration value="ЭЛ 30 10 60"/>
+                            <xs:enumeration value="ЭЛ 30 10 61"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="15. IfcMember - Стержневой элемент" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcMember</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Member</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 20 20 10"/>
+                            <xs:enumeration value="ЭЛ 20 20 15"/>
+                            <xs:enumeration value="ЭЛ 20 20 20"/>
+                            <xs:enumeration value="ЭЛ 20 20 25"/>
+                            <xs:enumeration value="ЭЛ 20 20 30"/>
+                            <xs:enumeration value="ЭЛ 20 20 35"/>
+                            <xs:enumeration value="ЭЛ 20 20 40"/>
+                            <xs:enumeration value="ЭЛ 20 20 45"/>
+                            <xs:enumeration value="ЭЛ 20 20 47"/>
+                            <xs:enumeration value="ЭЛ 20 20 50"/>
+                            <xs:enumeration value="ЭЛ 20 30 18"/>
+                            <xs:enumeration value="ЭЛ 30 10 10 20"/>
+                            <xs:enumeration value="ЭЛ 30 10 61 02"/>
+                            <xs:enumeration value="ЭЛ 30 12 50"/>
+                            <xs:enumeration value="ЭЛ 30 16 63 05"/>
+                            <xs:enumeration value="ЭЛ 30 16 63 45"/>
+                            <xs:enumeration value="ЭЛ 30 16 76"/>
+                            <xs:enumeration value="ЭЛ 30 16 80"/>
+                            <xs:enumeration value="ЭЛ 30 16 82 01"/>
+                            <xs:enumeration value="ЭЛ 30 16 82 02"/>
+                            <xs:enumeration value="ЭЛ 30 16 82 03"/>
+                            <xs:enumeration value="ЭЛ 30 16 82 04"/>
+                            <xs:enumeration value="ЭЛ 30 16 82 05"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 20"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 30"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 40"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 50"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 86"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 89"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 90"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="16. IfcPlate - Пластинчатый элемент" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcPlate</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Plate</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 10 10 10"/>
+                            <xs:enumeration value="ЭЛ 30 10 61 01"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 01"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 02"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 03"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 04"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 05"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 06"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 07"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 08"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 09"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 10"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 11"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 12"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 13"/>
+                            <xs:enumeration value="ЭЛ 30 16 83 14"/>
+                            <xs:enumeration value="ЭЛ 40 45 20 40"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="17. IfcElementAssembly - Сборка элементов" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcElementAssembly</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Assembly</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_AssemblyCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 20 20 36"/>
+                            <xs:enumeration value="ЭЛ 20 20 38"/>
+                            <xs:enumeration value="ЭЛ 30 16 10"/>
+                            <xs:enumeration value="ЭЛ 30 16 22"/>
+                            <xs:enumeration value="ЭЛ 30 16 30"/>
+                            <xs:enumeration value="ЭЛ 30 16 55"/>
+                            <xs:enumeration value="ЭЛ 30 16 63 35"/>
+                            <xs:enumeration value="ЭЛ 30 16 63 40"/>
+                            <xs:enumeration value="ЭЛ 30 16 63 50"/>
+                            <xs:enumeration value="ЭЛ 30 16 79"/>
+                            <xs:enumeration value="ЭЛ 30 16 81"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="18. IfcPile - Свая" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcPile</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Pile</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 10 10 10"/>
+                            <xs:enumeration value="ЭЛ 10 10 10 01"/>
+                            <xs:enumeration value="ЭЛ 10 10 10 02"/>
+                            <xs:enumeration value="ЭЛ 10 10 10 03"/>
+                            <xs:enumeration value="ЭЛ 10 10 10 04"/>
+                            <xs:enumeration value="ЭЛ 10 10 10 05"/>
+                            <xs:enumeration value="ЭЛ 10 20 20"/>
+                            <xs:enumeration value="ЭЛ 10 20 30"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="19. IfcFooting - Фундамент" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcFooting</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Footing</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 10 10 12"/>
+                            <xs:enumeration value="ЭЛ 10 10 12 01"/>
+                            <xs:enumeration value="ЭЛ 10 10 12 02"/>
+                            <xs:enumeration value="ЭЛ 10 10 12 03"/>
+                            <xs:enumeration value="ЭЛ 10 10 30"/>
+                            <xs:enumeration value="ЭЛ 10 10 30 01"/>
+                            <xs:enumeration value="ЭЛ 10 10 30 02"/>
+                            <xs:enumeration value="ЭЛ 10 10 30 03"/>
+                            <xs:enumeration value="ЭЛ 10 10 40"/>
+                            <xs:enumeration value="ЭЛ 10 10 40 01"/>
+                            <xs:enumeration value="ЭЛ 10 10 40 02"/>
+                            <xs:enumeration value="ЭЛ 10 10 40 03"/>
+                            <xs:enumeration value="ЭЛ 10 10 50"/>
+                            <xs:enumeration value="ЭЛ 10 10 70"/>
+                            <xs:enumeration value="ЭЛ 30 16 63 01"/>
+                            <xs:enumeration value="ЭЛ 30 16 63 10"/>
+                            <xs:enumeration value="ЭЛ 30 16 75"/>
+                            <xs:enumeration value="ЭЛ 60 10 20 10"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="20. IfcCableSegment - Кабель, провод" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcCableSegment</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_CableSegment</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 36 10 01"/>
+                            <xs:enumeration value="ЭЛ 40 36 10 02"/>
+                            <xs:enumeration value="ЭЛ 40 36 10 03"/>
+                            <xs:enumeration value="ЭЛ 40 36 10 04"/>
+                            <xs:enumeration value="ЭЛ 40 36 10 05"/>
+                            <xs:enumeration value="ЭЛ 40 36 10 06"/>
+                            <xs:enumeration value="ЭЛ 40 50 80 05"/>
+                            <xs:enumeration value="ЭЛ 60 45"/>
+                            <xs:enumeration value="ЭЛ 60 45 01"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="21. IfcCableFitting - Соединитель кабельной линии" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcCableFitting</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_CableFitting</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 36 15"/>
+                            <xs:enumeration value="ЭЛ 40 36 15 01"/>
+                            <xs:enumeration value="ЭЛ 40 36 15 02"/>
+                            <xs:enumeration value="ЭЛ 40 36 15 03"/>
+                            <xs:enumeration value="ЭЛ 40 36 15 04"/>
+                            <xs:enumeration value="ЭЛ 40 36 15 05"/>
+                            <xs:enumeration value="ЭЛ 60 40"/>
+                            <xs:enumeration value="ЭЛ 60 40 01"/>
+                            <xs:enumeration value="ЭЛ 60 40 02"/>
+                            <xs:enumeration value="ЭЛ 60 40 03"/>
+                            <xs:enumeration value="ЭЛ 60 40 04"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="22. IfcCableCarrierSegment - Кабеленесущая система" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcCableCarrierSegment</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_CableCarrierSegment</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 35 10 10"/>
+                            <xs:enumeration value="ЭЛ 40 35 10 20"/>
+                            <xs:enumeration value="ЭЛ 40 35 10 30"/>
+                            <xs:enumeration value="ЭЛ 60 35 01"/>
+                            <xs:enumeration value="ЭЛ 60 35 02"/>
+                            <xs:enumeration value="ЭЛ 60 35 04"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="23. IfcCableCarrierFitting - Соединения кабеленесущих систем" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcCableCarrierFitting</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_CableCarrierFitting</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 35 10 35"/>
+                            <xs:enumeration value="ЭЛ 40 35 10 36"/>
+                            <xs:enumeration value="ЭЛ 40 35 20 10"/>
+                            <xs:enumeration value="ЭЛ 40 35 20 20"/>
+                            <xs:enumeration value="ЭЛ 40 35 20 30"/>
+                            <xs:enumeration value="ЭЛ 40 35 20 40"/>
+                            <xs:enumeration value="ЭЛ 40 35 20 50"/>
+                            <xs:enumeration value="ЭЛ 40 35 20 60"/>
+                            <xs:enumeration value="ЭЛ 40 35 20 70"/>
+                            <xs:enumeration value="ЭЛ 40 35 20 80"/>
+                            <xs:enumeration value="ЭЛ 40 35 20 90"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="24. IfcMechanicalFastener - Элементы крепления" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcMechanicalFastener</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_MechanicalFastener</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 20 30 20"/>
+                            <xs:enumeration value="ЭЛ 40 45"/>
+                            <xs:enumeration value="ЭЛ 40 45 10"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 10"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 60"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 70"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 85"/>
+                            <xs:enumeration value="ЭЛ 40 45 10 87"/>
+                            <xs:enumeration value="ЭЛ 40 45 20 10"/>
+                            <xs:enumeration value="ЭЛ 40 45 20 20"/>
+                            <xs:enumeration value="ЭЛ 40 45 20 30"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="25. IfcTransformer - Трансформатор" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcTransformer</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Transformer</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 25 20"/>
+                            <xs:enumeration value="ЭЛ 40 50 25 30"/>
+                            <xs:enumeration value="ЭЛ 40 50 25 50"/>
+                            <xs:enumeration value="ЭЛ 40 50 25 70"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="26. IfcProtectiveDevice - Устройства защиты электрической сети" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcProtectiveDevice</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_ProtectiveDevice</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 25 10"/>
+                            <xs:enumeration value="ЭЛ 40 50 80"/>
+                            <xs:enumeration value="ЭЛ 40 50 80 01"/>
+                            <xs:enumeration value="ЭЛ 40 50 80 02"/>
+                            <xs:enumeration value="ЭЛ 40 50 80 03"/>
+                            <xs:enumeration value="ЭЛ 40 50 80 04"/>
+                            <xs:enumeration value="ЭЛ 40 50 80 06"/>
+                            <xs:enumeration value="ЭЛ 40 50 80 07"/>
+                            <xs:enumeration value="ЭЛ 40 50 80 08"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="27. IfcElectricFlowStorageDevice - Источник бесперебойного питания" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcElectricFlowStorageDevice</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_ElectricFlowStorageDevice</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 70"/>
+                            <xs:enumeration value="ЭЛ 40 50 70 01"/>
+                            <xs:enumeration value="ЭЛ 40 50 70 02"/>
+                            <xs:enumeration value="ЭЛ 40 50 70 03"/>
+                            <xs:enumeration value="ЭЛ 40 50 70 04"/>
+                            <xs:enumeration value="ЭЛ 40 50 70 05"/>
+                            <xs:enumeration value="ЭЛ 40 50 70 06"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="28. IfcSolarDevice - Солнечная батарея" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcSolarDevice</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_SolarDevice</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 90 01"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="29. IfcElectricDistributionBoard - Устройства распределительные" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcElectricDistributionBoard</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_ElectricalDevice</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 65"/>
+                            <xs:enumeration value="ЭЛ 40 50 65 02"/>
+                            <xs:enumeration value="ЭЛ 40 50 65 03"/>
+                            <xs:enumeration value="ЭЛ 40 50 65 04"/>
+                            <xs:enumeration value="ЭЛ 40 50 65 05"/>
+                            <xs:enumeration value="ЭЛ 40 50 65 06"/>
+                            <xs:enumeration value="ЭЛ 90 10 01"/>
+                            <xs:enumeration value="ЭЛ 90 10 02"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="30. IfcJunctionBox - Распределительная коробка, шкаф электрический (корпус)" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcJunctionBox</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_JunctionBox</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 20 50"/>
+                            <xs:enumeration value="ЭЛ 40 50 60 40"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="31. IfcElectricGenerator - Электрогенератор" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcElectricGenerator</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_ElectricGenerator</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 25 60"/>
+                            <xs:enumeration value="ЭЛ 50 20 10 20"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="32. IfcElectricMotor - Электродвигатель" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcElectricMotor</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_ElectricMotor</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 25 40"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="33. IfcSwitchingDevice - Выключатель, переключатель" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcSwitchingDevice</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_SwitchingDevice</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 30 21 07"/>
+                            <xs:enumeration value="ЭЛ 40 50 20 20"/>
+                            <xs:enumeration value="ЭЛ 40 50 20 21"/>
+                            <xs:enumeration value="ЭЛ 40 50 20 22"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="34. IfcOutlet - Розетка" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcOutlet</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Outlet</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 20 10"/>
+                            <xs:enumeration value="ЭЛ 40 50 20 80"/>
+                            <xs:enumeration value="ЭЛ 40 50 20 90"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="35. IfcLightFixture - Осветительные приборы, указатели" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcLightFixture</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_LightFixture</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 50"/>
+                            <xs:enumeration value="ЭЛ 40 50 50 10"/>
+                            <xs:enumeration value="ЭЛ 40 50 50 20"/>
+                            <xs:enumeration value="ЭЛ 40 50 50 25"/>
+                            <xs:enumeration value="ЭЛ 40 50 50 30"/>
+                            <xs:enumeration value="ЭЛ 40 50 50 35"/>
+                            <xs:enumeration value="ЭЛ 40 50 50 40"/>
+                            <xs:enumeration value="ЭЛ 40 50 50 45"/>
+                            <xs:enumeration value="ЭЛ 40 50 50 50"/>
+                            <xs:enumeration value="ЭЛ 40 50 50 55"/>
+                            <xs:enumeration value="ЭЛ 40 50 50 60"/>
+                            <xs:enumeration value="ЭЛ 40 50 50 65"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="36. IfcLamp - Лампа" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcLamp</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Lamp</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 51"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="37. IfcElectricAppliance - Бытовые электроприборы" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcElectricAppliance</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_ElectricAppliance</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 30 10"/>
+                            <xs:enumeration value="ЭЛ 40 50 30 15"/>
+                            <xs:enumeration value="ЭЛ 40 50 30 20"/>
+                            <xs:enumeration value="ЭЛ 40 50 30 25"/>
+                            <xs:enumeration value="ЭЛ 40 50 30 30"/>
+                            <xs:enumeration value="ЭЛ 40 50 30 35"/>
+                            <xs:enumeration value="ЭЛ 40 50 30 40"/>
+                            <xs:enumeration value="ЭЛ 40 50 30 45"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="38. IfcSpaceHeater - Отопительные приборы" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcSpaceHeater</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_SpaceHeater</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 10 26"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 42"/>
+                            <xs:enumeration value="ЭЛ 40 50 26 03"/>
+                            <xs:enumeration value="ЭЛ 40 50 26 05"/>
+                            <xs:enumeration value="ЭЛ 40 50 26 06"/>
+                            <xs:enumeration value="ЭЛ 40 50 26 11"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 01"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 05"/>
+                            <xs:enumeration value="ЭЛ 40 50 30 50"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 73"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="39. IfcFlowMeter - Счетчики" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcFlowMeter</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_FlowMeter</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 15 36 01"/>
+                            <xs:enumeration value="ЭЛ 40 50 20 60"/>
+                            <xs:enumeration value="ЭЛ 40 50 26 07"/>
+                            <xs:enumeration value="ЭЛ 40 50 29 12"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="40. IfcFlowInstrument - Контрольно-измерительные приборы" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcFlowInstrument</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_FlowInstrument</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 55 20 13"/>
+                            <xs:enumeration value="ЭЛ 40 55 20 14"/>
+                            <xs:enumeration value="ЭЛ 40 55 20 15"/>
+                            <xs:enumeration value="ЭЛ 40 55 20 17"/>
+                            <xs:enumeration value="ЭЛ 40 55 20 18"/>
+                            <xs:enumeration value="ЭЛ 40 55 20 19"/>
+                            <xs:enumeration value="ЭЛ 40 55 20 20"/>
+                            <xs:enumeration value="ЭЛ 40 55 20 21"/>
+                            <xs:enumeration value="ЭЛ 40 55 20 25"/>
+                            <xs:enumeration value="ЭЛ 40 55 20 30"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="41. IfcPipeSegment - Труба" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcPipeSegment</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_PipeSegment</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 10 65"/>
+                            <xs:enumeration value="ЭЛ 40 15 10"/>
+                            <xs:enumeration value="ЭЛ 40 15 10 10"/>
+                            <xs:enumeration value="ЭЛ 40 15 10 20"/>
+                            <xs:enumeration value="ЭЛ 40 15 31 02"/>
+                            <xs:enumeration value="ЭЛ 40 15 38"/>
+                            <xs:enumeration value="ЭЛ 40 40 10 10"/>
+                            <xs:enumeration value="ЭЛ 40 40 10 20"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="42. IfcPipeFitting - Трубопроводные фитинги" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcPipeFitting</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_PipeFitting</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 15 20"/>
+                            <xs:enumeration value="ЭЛ 40 15 20 10"/>
+                            <xs:enumeration value="ЭЛ 40 15 20 15"/>
+                            <xs:enumeration value="ЭЛ 40 15 20 20"/>
+                            <xs:enumeration value="ЭЛ 40 15 20 25"/>
+                            <xs:enumeration value="ЭЛ 40 15 20 30"/>
+                            <xs:enumeration value="ЭЛ 40 15 20 35"/>
+                            <xs:enumeration value="ЭЛ 40 15 20 40"/>
+                            <xs:enumeration value="ЭЛ 40 15 20 45"/>
+                            <xs:enumeration value="ЭЛ 40 15 20 52"/>
+                            <xs:enumeration value="ЭЛ 40 15 20 55"/>
+                            <xs:enumeration value="ЭЛ 40 15 20 60"/>
+                            <xs:enumeration value="ЭЛ 40 15 21"/>
+                            <xs:enumeration value="ЭЛ 40 40 20 10"/>
+                            <xs:enumeration value="ЭЛ 40 40 20 30"/>
+                            <xs:enumeration value="ЭЛ 40 40 20 40"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 51"/>
+                            <xs:enumeration value="ЭЛ 40 50 26 10"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="43. IfcValve - Трубопроводная арматура" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcValve</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Valve</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 15 30"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 05"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 10"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 15"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 20"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 21"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 25"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 30"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 35"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 36"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 37"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 40"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 55"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 56"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 65"/>
+                            <xs:enumeration value="ЭЛ 40 15 30 70"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 40"/>
+                            <xs:enumeration value="ЭЛ 40 50 26 08"/>
+                            <xs:enumeration value="ЭЛ 40 50 27 09"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="44. IfcSanitaryTerminal - Сантехнические приборы" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcSanitaryTerminal</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_SanitaryTerminal</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 20 30"/>
+                            <xs:enumeration value="ЭЛ 40 50 40"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 10"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 15"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 20"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 25"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 30"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 35"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 40"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 45"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 50"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 51"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 52"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 53"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 55"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 60"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 65"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 70"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 72"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="45. IfcWasteTerminal - Водоприемные устройства" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcWasteTerminal</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_WasteTerminal</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 15 31 01"/>
+                            <xs:enumeration value="ЭЛ 40 15 31 03"/>
+                            <xs:enumeration value="ЭЛ 40 40 20 20"/>
+                            <xs:enumeration value="ЭЛ 40 40 20 50"/>
+                            <xs:enumeration value="ЭЛ 40 40 20 60"/>
+                            <xs:enumeration value="ЭЛ 40 50 40 74"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="46. IfcFireSuppressionTerminal - Спринклер, дренчер, модуль АУП, пожарный кран" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcFireSuppressionTerminal</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_FireSuppressionTerminal</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 30 21 05"/>
+                            <xs:enumeration value="ЭЛ 40 50 27 01"/>
+                            <xs:enumeration value="ЭЛ 40 50 27 07"/>
+                            <xs:enumeration value="ЭЛ 40 50 27 10"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="47. IfcTank - Бак, резервуар, цистерна" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcTank</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Tank</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 10 10"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 11"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 24"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 33"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 35"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 36"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 47"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="48. IfcPump - Насос" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcPump</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Pump</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 10 32"/>
+                            <xs:enumeration value="ЭЛ 40 50 27 08"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="49. IfcBoiler - Котел, водонагреватель, бойлер" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcBoiler</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Boiler</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 10 12"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 16"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 30"/>
+                            <xs:enumeration value="ЭЛ 40 50 26 04"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="50. IfcDuctSegment - Воздуховод" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcDuctSegment</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_DuctSegment</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 20 10"/>
+                            <xs:enumeration value="ЭЛ 40 20 10 10"/>
+                            <xs:enumeration value="ЭЛ 40 20 10 20"/>
+                            <xs:enumeration value="ЭЛ 40 20 10 30"/>
+                            <xs:enumeration value="ЭЛ 40 20 10 40"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="51. IfcDuctFitting - Фасонная часть воздуховода" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcDuctFitting</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_DuctFitting</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 20 20"/>
+                            <xs:enumeration value="ЭЛ 40 20 20 10"/>
+                            <xs:enumeration value="ЭЛ 40 20 20 12"/>
+                            <xs:enumeration value="ЭЛ 40 20 20 14"/>
+                            <xs:enumeration value="ЭЛ 40 20 20 16"/>
+                            <xs:enumeration value="ЭЛ 40 20 20 18"/>
+                            <xs:enumeration value="ЭЛ 40 20 20 20"/>
+                            <xs:enumeration value="ЭЛ 40 20 20 22"/>
+                            <xs:enumeration value="ЭЛ 40 20 20 24"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="52. IfcStackTerminal - Устройства защиты вентиляции" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcStackTerminal</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_StackTerminal</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 20 30 22"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 18"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 20"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 24"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="53. IfcDamper - Воздушный клапан вентиляции" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcDamper</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Damper</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 20 40 12"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 14"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 25"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 26"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 27"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 33"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 34"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 35"/>
+                            <xs:enumeration value="ЭЛ 40 50 27 02"/>
+                            <xs:enumeration value="ЭЛ 40 50 29 13"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="54. IfcFan - Вентилятор" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcFan</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Fan</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 28 04"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="55. IfcVibrationIsolator - Виброизолятор" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcVibrationIsolator</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_VibrationIsolator</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 20 40 46"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="56. IfcAirTerminal - Оконечные устройства воздуховода" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcAirTerminal</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_AirTerminal</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 20 30"/>
+                            <xs:enumeration value="ЭЛ 40 20 30 10"/>
+                            <xs:enumeration value="ЭЛ 40 20 30 20"/>
+                            <xs:enumeration value="ЭЛ 40 20 30 30"/>
+                            <xs:enumeration value="ЭЛ 40 20 30 40"/>
+                            <xs:enumeration value="ЭЛ 40 20 30 50"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 10"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="57. IfcAirTerminalBox - Камера воздушная, воздухораспределитель" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcAirTerminalBox</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_AirTerminalBox</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 20 40 28"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 29"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 30"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 31"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 45"/>
+                            <xs:enumeration value="ЭЛ 40 50 26 01"/>
+                            <xs:enumeration value="ЭЛ 40 50 26 02"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="58. IfcUnitaryEquipment - Фанкойл" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcUnitaryEquipment</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_UnitaryEquipment</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 10 34"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 02"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 03"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 06"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 08"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 10"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 11"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 12"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 14"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 15"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="59. IfcChiller - Холодильная машина, чиллер" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcChiller</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Chiller</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 10 20"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 40"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 49"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 50"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 09"/>
+                            <xs:enumeration value="ЭЛ 40 50 28 13"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="60. IfcHeatExchanger - Теплообменник, рекуператор" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcHeatExchanger</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_HeatExchanger</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 10 37"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 44"/>
+                            <xs:enumeration value="ЭЛ 40 50 10 45"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="61. IfcCommunicationsAppliance - Оборудование для передачи данных" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcCommunicationsAppliance</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_CommunicationsAppliance</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 55"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 05"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 10"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 15"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 20"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 25"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 30"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 35"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 40"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 45"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 50"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 55"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 60"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 65"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 70"/>
+                            <xs:enumeration value="ЭЛ 40 50 55 75"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="62. IfcAudioVisualAppliance - Аудиосистемы, видеосистемы" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcAudioVisualAppliance</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_AudioVisualAppliance</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 35 10"/>
+                            <xs:enumeration value="ЭЛ 40 55 10 30"/>
+                            <xs:enumeration value="ЭЛ 60 30"/>
+                            <xs:enumeration value="ЭЛ 60 30 01"/>
+                            <xs:enumeration value="ЭЛ 60 30 02"/>
+                            <xs:enumeration value="ЭЛ 60 30 03"/>
+                            <xs:enumeration value="ЭЛ 60 30 04"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="63. IfcSensor - Датчик" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcSensor</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Sensor</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 27 04"/>
+                            <xs:enumeration value="ЭЛ 40 55 20 10"/>
+                            <xs:enumeration value="ЭЛ 40 55 20 12"/>
+                            <xs:enumeration value="ЭЛ 40 55 20 16"/>
+                            <xs:enumeration value="ЭЛ 60 55 06 01"/>
+                            <xs:enumeration value="ЭЛ 60 55 06 02"/>
+                            <xs:enumeration value="ЭЛ 60 55 06 03"/>
+                            <xs:enumeration value="ЭЛ 60 55 06 04"/>
+                            <xs:enumeration value="ЭЛ 60 55 06 05"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="64. IfcAlarm - Оповещатель пожарный, сирена" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcAlarm</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Alarm</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 30 21 01"/>
+                            <xs:enumeration value="ЭЛ 40 30 21 02"/>
+                            <xs:enumeration value="ЭЛ 40 30 21 03"/>
+                            <xs:enumeration value="ЭЛ 40 30 21 04"/>
+                            <xs:enumeration value="ЭЛ 40 50 20 30"/>
+                            <xs:enumeration value="ЭЛ 40 50 27 05"/>
+                            <xs:enumeration value="ЭЛ 40 55 10 40"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="65. IfcController - Блок управления, контрольная панель" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcController</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Controller</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 30 21 06"/>
+                            <xs:enumeration value="ЭЛ 40 30 21 08"/>
+                            <xs:enumeration value="ЭЛ 40 55 10 20"/>
+                            <xs:enumeration value="ЭЛ 40 55 10 50"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="66. IfcBurner - Газовый прибор" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcBurner</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Burner</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 29 02"/>
+                            <xs:enumeration value="ЭЛ 40 50 29 08"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="67. IfcTransportElement - Лифт, подъемник, эскалатор" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcTransportElement</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_TransportElement</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 10"/>
+                            <xs:enumeration value="ЭЛ 40 10 10"/>
+                            <xs:enumeration value="ЭЛ 40 10 10 10"/>
+                            <xs:enumeration value="ЭЛ 40 10 10 20"/>
+                            <xs:enumeration value="ЭЛ 40 10 10 30"/>
+                            <xs:enumeration value="ЭЛ 40 10 10 40"/>
+                            <xs:enumeration value="ЭЛ 40 10 10 50"/>
+                            <xs:enumeration value="ЭЛ 40 10 10 60"/>
+                            <xs:enumeration value="ЭЛ 40 10 20"/>
+                            <xs:enumeration value="ЭЛ 40 10 20 10"/>
+                            <xs:enumeration value="ЭЛ 40 10 20 20"/>
+                            <xs:enumeration value="ЭЛ 40 10 20 30"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="68. IfcChimney - Ствол мусоропровода, дымоход" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcChimney</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Chimney</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 20 10"/>
+                            <xs:enumeration value="ЭЛ 30 25 50"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="69. IfcFurniture - Мебель" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcFurniture</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Furniture</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 60 25"/>
+                            <xs:enumeration value="ЭЛ 40 50 60 50"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 10"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 12"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 13"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 14"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 15"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 16"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 17"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 18"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 19"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 20"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 21"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 23"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 24"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 25"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 26"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 27"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 28"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 29"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 30"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 31"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 32"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 33"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 34"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 35"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 36"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 37"/>
+                            <xs:enumeration value="ЭЛ 40 60 10 38"/>
+                            <xs:enumeration value="ЭЛ 40 60 20 10"/>
+                            <xs:enumeration value="ЭЛ 40 60 20 20"/>
+                            <xs:enumeration value="ЭЛ 40 60 20 30"/>
+                            <xs:enumeration value="ЭЛ 40 60 20 40"/>
+                            <xs:enumeration value="ЭЛ 40 60 20 50"/>
+                            <xs:enumeration value="ЭЛ 40 60 20 60"/>
+                            <xs:enumeration value="ЭЛ 70 70 07"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="70. IfcAirToAirHeatRecovery - Воздухонагреватель" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcAirToAirHeatRecovery</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_AirToAirHeatRecovery</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 50 28 07"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="71. IfcDiscreteAccessory - Закладная деталь" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcDiscreteAccessory</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_DiscreteAccessory</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 80 10"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="72. IfcDistributionChamberElement - Колодец, камера" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcDistributionChamberElement</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_DistributionChamberElement</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 15 20 50"/>
+                            <xs:enumeration value="ЭЛ 40 15 31 04"/>
+                            <xs:enumeration value="ЭЛ 40 15 31 05"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="73. IfcDuctSilencer - Узел прохода вентиляционной шахты, шумоглушитель" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcDuctSilencer</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_DuctSilencer</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 20 40 32"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 42"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="74. IfcEarthworksElement - Земляное полотно" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcEarthworksElement</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_EarthworksElement</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 70 20"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="75. IfcFilter - Фильтр" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcFilter</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Filter</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 40 15 30 60"/>
+                            <xs:enumeration value="ЭЛ 40 20 40 16"/>
+                            <xs:enumeration value="ЭЛ 40 50 26 09"/>
+                            <xs:enumeration value="ЭЛ 40 50 29 11"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="76. IfcGeographicElement - Элемент земляных работ" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcGeographicElement</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_GeographicElement</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 10 40 10"/>
+                            <xs:enumeration value="ЭЛ 10 40 20"/>
+                            <xs:enumeration value="ЭЛ 10 40 30"/>
+                            <xs:enumeration value="ЭЛ 10 40 40"/>
+                            <xs:enumeration value="ЭЛ 10 40 50"/>
+                            <xs:enumeration value="ЭЛ 10 40 60"/>
+                            <xs:enumeration value="ЭЛ 10 40 70"/>
+                            <xs:enumeration value="ЭЛ 10 40 80"/>
+                            <xs:enumeration value="ЭЛ 10 40 90"/>
+                            <xs:enumeration value="ЭЛ 70 40"/>
+                            <xs:enumeration value="ЭЛ 70 50 02"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="77. IfcRail - Рельсы" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcRail</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Rail</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 60 20 01"/>
+                            <xs:enumeration value="ЭЛ 60 20 01 01"/>
+                            <xs:enumeration value="ЭЛ 60 20 01 02"/>
+                            <xs:enumeration value="ЭЛ 60 20 01 03"/>
+                            <xs:enumeration value="ЭЛ 60 20 01 04"/>
+                            <xs:enumeration value="ЭЛ 60 20 01 05"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="78. IfcReinforcedSoil - Грунт армированный" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcReinforcedSoil</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_ReinforcedSoil</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 10 25 10"/>
+                            <xs:enumeration value="ЭЛ 10 25 20"/>
+                            <xs:enumeration value="ЭЛ 10 25 30"/>
+                            <xs:enumeration value="ЭЛ 10 25 40"/>
+                            <xs:enumeration value="ЭЛ 10 25 50"/>
+                            <xs:enumeration value="ЭЛ 10 25 60"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="79. IfcReinforcingBar - Арматура" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcReinforcingBar</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_ReinforcingBar</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 90 10"/>
+                            <xs:enumeration value="ЭЛ 30 90 80"/>
+                            <xs:enumeration value="ЭЛ 30 90 81"/>
+                            <xs:enumeration value="ЭЛ 30 90 82"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="80. IfcReinforcingElement - Элемент армирующий" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcReinforcingElement</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_ReinforcingElement</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 20 90"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="81. IfcReinforcingMesh - Изделие арматурное" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcReinforcingMesh</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_ReinforcingMesh</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 90 20"/>
+                            <xs:enumeration value="ЭЛ 30 90 60"/>
+                            <xs:enumeration value="ЭЛ 30 90 70"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="82. IfcRoadPart - Элемент дороги" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcRoadPart</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_RoadPart</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 70 40 01"/>
+                            <xs:enumeration value="ЭЛ 70 40 01 01"/>
+                            <xs:enumeration value="ЭЛ 70 40 01 02"/>
+                            <xs:enumeration value="ЭЛ 70 40 01 03"/>
+                            <xs:enumeration value="ЭЛ 70 40 01 04"/>
+                            <xs:enumeration value="ЭЛ 70 40 01 05"/>
+                            <xs:enumeration value="ЭЛ 70 40 04"/>
+                            <xs:enumeration value="ЭЛ 70 40 05"/>
+                            <xs:enumeration value="ЭЛ 70 40 06"/>
+                            <xs:enumeration value="ЭЛ 70 40 07"/>
+                            <xs:enumeration value="ЭЛ 70 40 08"/>
+                            <xs:enumeration value="ЭЛ 70 40 09"/>
+                            <xs:enumeration value="ЭЛ 70 40 10"/>
+                            <xs:enumeration value="ЭЛ 70 40 11"/>
+                            <xs:enumeration value="ЭЛ 70 40 12"/>
+                            <xs:enumeration value="ЭЛ 70 40 12 01"/>
+                            <xs:enumeration value="ЭЛ 70 40 12 02"/>
+                            <xs:enumeration value="ЭЛ 70 40 12 03"/>
+                            <xs:enumeration value="ЭЛ 70 40 13"/>
+                            <xs:enumeration value="ЭЛ 70 40 14"/>
+                            <xs:enumeration value="ЭЛ 70 40 15"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="83. IfcShadingDevice - Навес" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcShadingDevice</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_ShadingDevice</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 10 30"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="84. IfcTendon - Арматура преднапряженная (канат)" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcTendon</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_Tendon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 90 30"/>
+                            <xs:enumeration value="ЭЛ 30 90 40"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="85. IfcTendonAnchor - Анкер" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcTendonAnchor</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_TendonAnchor</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 30 90 50"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="86. IfcTrackElement - Элемент пути" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcTrackElement</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <property cardinality="required" dataType="IFCTEXT">
+                    <propertySet>
+                        <simpleValue>ExpCheck_TrackElement</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>MGE_ElementCode</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ЭЛ 60 20 02"/>
+                            <xs:enumeration value="ЭЛ 60 20 04"/>
+                            <xs:enumeration value="ЭЛ 60 20 05"/>
+                            <xs:enumeration value="ЭЛ 60 20 06"/>
+                            <xs:enumeration value="ЭЛ 60 20 07"/>
+                            <xs:enumeration value="ЭЛ 60 20 14"/>
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+    </specifications>
+</ids>

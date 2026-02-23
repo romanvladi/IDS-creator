@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Настраиваем обработчики событий
     setupEventListeners();
+
+    // Добавляем инициализацию растягиваемой панели
+    initResizablePanel();
 });
 
 /**
@@ -918,6 +921,9 @@ function onResize(e) {
     
     // Обновляем атрибут с текущей шириной
     editorPanel.setAttribute('data-width', `${Math.round(newWidth)}px`);
+
+    // Добавить обновление индикатора прямо здесь
+    updateResizeIndicator(e);
 }
 
 /**
@@ -1051,20 +1057,3 @@ const styleSheet = document.createElement("style");
 styleSheet.textContent = resizeIndicatorStyles;
 document.head.appendChild(styleSheet);
 
-// Переопределяем onResize для обновления индикатора
-const originalOnResize = onResize;
-onResize = function(e) {
-    originalOnResize(e);
-    if (isResizing) {
-        updateResizeIndicator(e);
-    }
-};
-
-// Инициализируем при загрузке страницы
-// Добавляем вызов в существующий DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    // ... существующий код инициализации ...
-    
-    // Добавляем инициализацию растягиваемой панели
-    initResizablePanel();
-});

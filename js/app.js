@@ -479,7 +479,7 @@ function renderApplicabilityRule(rule, index) {
         <div class="rule-card" data-rule-type="applicability" data-rule-index="${index}">
             <div class="rule-card-header">
                 <span class="rule-type-badge">${rule.displayType || 'Правило'}</span>
-                <button class="icon-btn" onclick="removeRule('${rule.id || 'new'}')" title="Удалить">✕</button>
+                <button class="icon-btn" onclick="removeRule('applicability', ${index})" title="Удалить">✕</button>
             </div>
             <div class="rule-fields">
                 <div class="rule-field">
@@ -531,6 +531,7 @@ function renderRequirementsRule(rule, index) {
                         onchange="updateCardinality(this, ${index})">
                     ${cardinalityOptions}
                 </select>
+                <button class="icon-btn" onclick="removeRule('requirements', ${index})" title="Удалить">✕</button>
             </div>
             <div class="rule-fields">
                 <div class="rule-field">
@@ -792,11 +793,26 @@ function updateDataType(select, index) {
 /**
  * Удалить правило
  */
-function removeRule(ruleId) {
-    // Временная заглушка
+function removeRule(ruleType, index) {
+    const spec = currentIDS.specifications.find(s => s.id === selectedSpecId);
+    if (!spec) return;
+    
     if (confirm('Удалить правило?')) {
-        console.log('Удаление правила', ruleId);
-        // В реальном приложении нужно найти и удалить правило
+        if (ruleType === 'applicability') {
+            if (spec.applicability && spec.applicability.rules) {
+                spec.applicability.rules.splice(index, 1);
+            }
+        } else if (ruleType === 'requirements') {
+            if (spec.requirements && spec.requirements.rules) {
+                spec.requirements.rules.splice(index, 1);
+            }
+        }
+        
+        // Перерисовываем редактор
+        renderSpecEditor(spec);
+        
+        // Обновляем счетчики в карточках
+        renderSpecifications();
     }
 }
 

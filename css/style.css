@@ -28,12 +28,14 @@ body {
     align-items: center;
     border-bottom: 1px solid #e1e4e8;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    gap: 1rem; /* Добавить: отступ между группами */
 }
 
 .file-info {
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex: 1; /* Добавить: занимать всё доступное место */
 }
 
 .filename {
@@ -42,6 +44,8 @@ body {
     border: 1px solid transparent;
     border-radius: 4px;
     font-weight: 500;
+    width: 100%; /* Добавить: растянуться внутри .file-info */
+    min-width: 200px; /* Опционально: минимальная ширина, чтобы не схлопнулось */
 }
 
 .filename:hover {

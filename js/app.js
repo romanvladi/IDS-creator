@@ -6,7 +6,7 @@ let currentIDS = {
         title: 'Без имени',
         copyright: 'Пользователь',
         version: 'IFC4',
-        author: '',
+        author: 'user@example.com',
         date: new Date().toISOString().split('T')[0]
     },
     specifications: []
@@ -58,7 +58,7 @@ function setupEventListeners() {
     // Поле имени файла в шапке
     document.querySelector('.filename').addEventListener('input', (e) => {
         currentIDS.info.title = e.target.value;
-        document.getElementById('infoTitle').value = e.target.value;
+        //document.getElementById('infoTitle').value = e.target.value;//убрать
     });
 }
 
@@ -72,7 +72,7 @@ function createNewFile() {
                 title: 'Новый файл.ids',
                 copyright: 'Пользователь',
                 version: 'IFC4',
-                author: '',
+                author: 'user@example.com',
                 date: new Date().toISOString().split('T')[0]
             },
             specifications: []
@@ -126,14 +126,9 @@ function openFile() {
                 document.getElementById('selectedSpecName').textContent = 'Не выбрано';
                 document.getElementById('editorContent').innerHTML = '<p class="placeholder">Выберите спецификацию для редактирования</p>';
                 
-                // Обновляем статус валидации
-                document.querySelector('.status-badge').className = 'status-badge status-valid';
-                document.querySelector('.status-badge').textContent = 'Валидно';
-                
             } catch (error) {
                 alert('Ошибка при загрузке файла: ' + error.message);
-                document.querySelector('.status-badge').className = 'status-badge status-invalid';
-                document.querySelector('.status-badge').textContent = 'Ошибка';
+                createNewFile();
             }
         };
         
@@ -191,7 +186,7 @@ function updateInfoFromForm() {
     currentIDS.info.copyright = document.getElementById('infoCopyright').value;
     
     // Обновляем имя в шапке
-    document.querySelector('.filename').value = currentIDS.info.title;
+    //document.querySelector('.filename').value = currentIDS.info.title;
 }
 
 /**

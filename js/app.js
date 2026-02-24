@@ -3,7 +3,7 @@
 // Глобальные переменные
 let currentIDS = {
     info: {
-        title: 'Без имени',
+        title: 'Новая проверка',
         copyright: 'Пользователь',
         version: 'IFC4',
         author: 'user@example.com',
@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Заполняем информацию о файле
     updateInfoFromCurrent();
+    renderSpecifications();
     
     // Загружаем пример для демонстрации (можно будет загрузить позже)
     // loadExampleFile('examples/1-ravno-ili-ravno.xml');
@@ -69,7 +70,7 @@ function createNewFile() {
     if (confirm('Создать новый файл? Несохраненные изменения будут потеряны.')) {
         currentIDS = {
             info: {
-                title: 'Новый файл.ids',
+                title: 'Новая проверка',
                 copyright: 'Пользователь',
                 version: 'IFC4',
                 author: 'user@example.com',

@@ -80,7 +80,7 @@ function createNewFile() {
         };
         
         // Обновляем интерфейс
-        document.querySelector('.filename').value = currentIDS.info.title;
+        document.querySelector('.filename').value = 'Новый файл.ids';
         updateInfoFromCurrent();
         renderSpecifications();
         

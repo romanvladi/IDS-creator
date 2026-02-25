@@ -14,7 +14,8 @@ let currentIDS = {
 
 let selectedSpecId = null;
 let parser = null;
-let specCardTemplate = null;
+let specCardTemplate = null; // возможно нужно изменить на = '';
+let emptyStateTemplate = null; // возможно нужно изменить на = '';
 
 // Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', async () => {
@@ -70,8 +71,11 @@ function setupEventListeners() {
  * Загрузка шаблона html(карточки спецификаций) из файла
  */
 async function loadTemplates() {
-    const response = await fetch('templates/spec-card.html');
-    specCardTemplate = await response.text();
+    const response1 = await fetch('templates/spec-card.html');
+    specCardTemplate = await response1.text();
+
+    const response2 = await fetch('templates/empty-state.html');
+    emptyStateTemplate = await response2.text();
 }
 
 /**
@@ -233,11 +237,17 @@ function addNewSpecification() {
  * Отрисовывает список спецификаций
  */
 function renderSpecifications() {
-    // Проверяем, загружен ли шаблон
+    // Проверяем, загружен ли шаблон карточки
     if (!specCardTemplate) {
         console.log('Ждем загрузку шаблона...');
         return;
     }
+
+    //Проверяем, загружен ли шаблон пустышки
+    if (!emptyStateTemplate) {
+        console.warn('Шаблон не загружен');
+        return;
+    }    
 
     const specList = document.getElementById('specList');
     
@@ -246,14 +256,8 @@ function renderSpecifications() {
     
     //если спецификаций нет
     if (currentIDS.specifications.length === 0) {
-        // Показываем заглушку (можно тоже вынести в шаблон позже)
-        const emptyState = document.createElement('div');
-        emptyState.className = 'empty-state';
-        emptyState.innerHTML = `
-            <p>Нет спецификаций</p>
-            <small>Нажмите "+ Добавить спецификацию" чтобы создать первую</small>
-        `;
-        specList.appendChild(emptyState);
+        // Показываем заглушку
+        specList.innerHTML = emptyStateTemplate;
         return;
     }
     

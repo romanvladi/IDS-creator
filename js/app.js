@@ -14,8 +14,11 @@ let currentIDS = {
 
 let selectedSpecId = null;
 let parser = null;
+
+//Переменные для шаблонов html
 let specCardTemplate = null; // возможно нужно изменить на = '';
 let emptyStateTemplate = null; // возможно нужно изменить на = '';
+let editorTabsTemplate = null; // возможно нужно изменить на = '';
 
 // Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', async () => {
@@ -68,7 +71,7 @@ function setupEventListeners() {
 }
 
 /**
- * Загрузка шаблона html(карточки спецификаций) из файла
+ * Загрузка шаблонов html из файлов
  */
 async function loadTemplates() {
     const response1 = await fetch('templates/spec-card.html');
@@ -76,6 +79,9 @@ async function loadTemplates() {
 
     const response2 = await fetch('templates/empty-state.html');
     emptyStateTemplate = await response2.text();
+
+    const response3 = await fetch('templates/editor-tabs.html');
+    editorTabsTemplate = await response3.text();
 }
 
 /**
@@ -408,70 +414,37 @@ function deleteSpecification(specId) {
  * Отрисовывает редактор для выбранной спецификации
  */
 function renderSpecEditor(spec) {
+    if (!editorTabsTemplate) {
+        console.warn('Шаблон редактора не загружен');
+        return;
+    }
+    
     const editorContent = document.getElementById('editorContent');
     
-    // Создаем структуру редактора
-    let html = `
-        <div class="editor-tabs">
-            <button class="editor-tab active" data-tab="applicability">Применимость</button>
-            <button class="editor-tab" data-tab="requirements">Требования</button>
-        </div>
-        
-        <div id="applicability-tab" class="tab-content">
-            <div class="editor-section">
-                <div class="section-title">Условия отбора (applicability)</div>
-                <div id="applicability-rules" class="rules-container">
-    `;
-    
-    // Добавляем правила applicability
+    // Генерируем HTML для правил
+    let applicabilityHtml = '';
     if (spec.applicability?.rules?.length > 0) {
         spec.applicability.rules.forEach((rule, index) => {
-            html += renderApplicabilityRule(rule, index);
+            applicabilityHtml += renderApplicabilityRule(rule, index);
         });
     } else {
-        html += `<p class="placeholder">Нет правил применимости</p>`;
+        applicabilityHtml = '<p class="placeholder">Нет правил применимости</p>';
     }
     
-    html += `
-                </div>
-                <button class="add-condition" onclick="addApplicabilityRule('${spec.id}')">
-                    + Добавить условие отбора
-                </button>
-            </div>
-        </div>
-        
-        <div id="requirements-tab" class="tab-content" style="display: none;">
-            <div class="editor-section">
-                <div class="section-title">Требования к свойствам</div>
-                <div id="requirements-rules" class="rules-container">
-    `;
-    
-    // Добавляем правила requirements
+    let requirementsHtml = '';
     if (spec.requirements?.rules?.length > 0) {
         spec.requirements.rules.forEach((rule, index) => {
-            html += renderRequirementsRule(rule, index);
+            requirementsHtml += renderRequirementsRule(rule, index);
         });
     } else {
-        html += `<p class="placeholder">Нет требований</p>`;
+        requirementsHtml = '<p class="placeholder">Нет требований</p>';
     }
     
-    html += `
-                </div>
-                <button class="add-condition" onclick="addRequirementRule('${spec.id}')">
-                    + Добавить требование
-                </button>
-            </div>
-        </div>
-        
-        <div class="editor-actions">
-            <button class="btn-block" onclick="testSpecification('${spec.id}')">
-                🔍 Проверить на тестовой модели
-            </button>
-            <button class="btn-block btn-danger" onclick="clearSpecification('${spec.id}')">
-                🗑️ Очистить правила
-            </button>
-        </div>
-    `;
+    // Заменяем плейсхолдеры в шаблоне
+    let html = editorTabsTemplate
+        .replace('{{applicabilityRules}}', applicabilityHtml)
+        .replace('{{requirementsRules}}', requirementsHtml)
+        .replace(new RegExp('{{specId}}', 'g'), spec.id);  // заменяем все вхождения
     
     editorContent.innerHTML = html;
     

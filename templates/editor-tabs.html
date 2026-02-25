@@ -1,0 +1,37 @@
+<div class="editor-tabs">
+    <button class="editor-tab active" data-tab="applicability">Применимость</button>
+    <button class="editor-tab" data-tab="requirements">Требования</button>
+</div>
+
+<div id="applicability-tab" class="tab-content">
+    <div class="editor-section">
+        <div class="section-title">Условия отбора (applicability)</div>
+        <div id="applicability-rules" class="rules-container">
+            {{applicabilityRules}}
+        </div>
+        <button class="add-condition" onclick="addApplicabilityRule('{{specId}}')">
+            + Добавить условие отбора
+        </button>
+    </div>
+</div>
+
+<div id="requirements-tab" class="tab-content" style="display: none;">
+    <div class="editor-section">
+        <div class="section-title">Требования к свойствам</div>
+        <div id="requirements-rules" class="rules-container">
+            {{requirementsRules}}
+        </div>
+        <button class="add-condition" onclick="addRequirementRule('{{specId}}')">
+            + Добавить требование
+        </button>
+    </div>
+</div>
+
+<div class="editor-actions">
+    <button class="btn-block" onclick="testSpecification('{{specId}}')">
+        🔍 Проверить на тестовой модели
+    </button>
+    <button class="btn-block btn-danger" onclick="clearSpecification('{{specId}}')">
+        🗑️ Очистить правила
+    </button>
+</div>

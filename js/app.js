@@ -19,6 +19,7 @@ let parser = null;
 let specCardTemplate = null; // возможно нужно изменить на = '';
 let emptyStateTemplate = null; // возможно нужно изменить на = '';
 let editorTabsTemplate = null; // возможно нужно изменить на = '';
+let applicabilityRuleTemplate = null; // возможно нужно изменить на = '';
 
 // Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', async () => {
@@ -82,6 +83,9 @@ async function loadTemplates() {
 
     const response3 = await fetch('templates/editor-tabs.html');
     editorTabsTemplate = await response3.text();
+
+    const response4 = await fetch('templates/applicability-rule.html');
+    applicabilityRuleTemplate = await response4.text();
 }
 
 /**
@@ -456,41 +460,29 @@ function renderSpecEditor(spec) {
  * Отрисовывает одно правило applicability
  */
 function renderApplicabilityRule(rule, index) {
-    let conditionOptions = getConditionOptions(rule.type);
+    if (!applicabilityRuleTemplate) {
+        console.error('Шаблон applicability не загружен');
+        return '<div class="error">Ошибка загрузки шаблона</div>';
+    }
     
-    return `
-        <div class="rule-card" data-rule-type="applicability" data-rule-index="${index}">
-            <div class="rule-card-header">
-                <span class="rule-type-badge">${rule.displayType || 'Правило'}</span>
-                <button class="icon-btn" onclick="removeRule('applicability', ${index})" title="Удалить">✕</button>
-            </div>
-            <div class="rule-fields">
-                <div class="rule-field">
-                    <label>Тип правила</label>
-                    <select onchange="changeRuleType(this, 'applicability', ${index})">
-                        <option value="entity" ${rule.type === 'entity' ? 'selected' : ''}>Сущность IFC</option>
-                        <option value="attribute" ${rule.type === 'attribute' ? 'selected' : ''}>Атрибут</option>
-                        <option value="property" ${rule.type === 'property' ? 'selected' : ''}>Свойство</option>
-                    </select>
-                </div>
-                <div class="rule-field">
-                    <label>Поле</label>
-                    <input type="text" value="${rule.field || ''}" placeholder="Например: Name" 
-                           onchange="updateRuleField(this, 'applicability', ${index})">
-                </div>
-                <div class="rule-field">
-                    <label>Условие</label>
-                    <select onchange="updateRuleCondition(this, 'applicability', ${index})">
-                        ${conditionOptions}
-                    </select>
-                </div>
-                <div class="rule-field">
-                    <label>Значение</label>
-                    ${renderValueInput(rule)}
-                </div>
-            </div>
-        </div>
-    `;
+    // Для applicability только "равно" (скрытое поле или задизейбленное)
+    const conditionOptions = '<option value="equals" selected>Равно</option>';
+    
+    // Генерируем поле ввода значения
+    const valueInput = renderValueInput(rule);
+    
+    // Заменяем плейсхолдеры
+    let html = applicabilityRuleTemplate
+        .replace(/{{index}}/g, index)
+        .replace('{{displayType}}', rule.displayType || 'Правило')
+        .replace('{{field}}', rule.field || '')
+        .replace('{{conditionOptions}}', conditionOptions)
+        .replace('{{valueInput}}', valueInput)
+        .replace('{{#if isEntity}}', rule.type === 'entity' ? 'selected' : '')
+        .replace('{{#if isAttribute}}', rule.type === 'attribute' ? 'selected' : '')
+        .replace('{{#if isProperty}}', rule.type === 'property' ? 'selected' : '');
+    
+    return html;
 }
 
 /**

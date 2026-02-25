@@ -14,9 +14,10 @@ let currentIDS = {
 
 let selectedSpecId = null;
 let parser = null;
+let specCardTemplate = null;
 
 // Ждем загрузки DOM
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Инициализируем парсер
     parser = new IDSParser();
     
@@ -25,6 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Заполняем информацию о файле
     updateInfoFromCurrent();
+
+    //Загружаем (ждем) шаблон перед отрисовкой
+    await loadTemplates();
+
+    //отрисовываем карточки
     renderSpecifications();
     
     // Настраиваем обработчики событий
@@ -58,6 +64,14 @@ function setupEventListeners() {
         currentIDS.info.title = e.target.value;
         //document.getElementById('infoTitle').value = e.target.value;//убрать
     });
+}
+
+/**
+ * Загрузка шаблона html(карточки спецификаций) из файла
+ */
+async function loadTemplates() {
+    const response = await fetch('templates/spec-card.html');
+    specCardTemplate = await response.text();
 }
 
 /**
@@ -219,14 +233,20 @@ function addNewSpecification() {
  * Отрисовывает список спецификаций
  */
 function renderSpecifications() {
+    // Проверяем, загружен ли шаблон
+    if (!specCardTemplate) {
+        console.log('Ждем загрузку шаблона...');
+        return;
+    }
+
     const specList = document.getElementById('specList');
-    const template = document.getElementById('specTemplate');
     
     // Очищаем список
     specList.innerHTML = '';
     
+    //если спецификаций нет
     if (currentIDS.specifications.length === 0) {
-        // Показываем заглушку, если нет спецификаций
+        // Показываем заглушку (можно тоже вынести в шаблон позже)
         const emptyState = document.createElement('div');
         emptyState.className = 'empty-state';
         emptyState.innerHTML = `
@@ -239,36 +259,36 @@ function renderSpecifications() {
     
     // Отрисовываем каждую спецификацию
     currentIDS.specifications.forEach(spec => {
-        const specCard = document.importNode(template.content, true).querySelector('.spec-card');
-        
-        // Заполняем данные
-        const nameInput = specCard.querySelector('.spec-name');
-        nameInput.value = spec.name;
-        
         // Считаем количество правил
         const rulesCount = (spec.applicability?.rules?.length || 0) + 
                           (spec.requirements?.rules?.length || 0);
         
-        const entityValue = specCard.querySelector('.entity-value');
         // Ищем первое entity правило для предпросмотра
         const entityRule = spec.applicability?.rules?.find(r => r.type === 'entity');
-        entityValue.textContent = entityRule ? entityRule.value : 'Нет сущности';
+        const entityValue = entityRule ? entityRule.value : 'Нет сущности';
         
-        const specCount = specCard.querySelector('.spec-count');
-        specCount.textContent = `${rulesCount} ${getRulesWord(rulesCount)}`;
+        // Заменяем плейсхолдеры в шаблоне
+        let cardHtml = specCardTemplate
+            .replace('{{specId}}', spec.id)
+            .replace('{{specName}}', spec.name)
+            .replace('{{entityValue}}', entityValue)
+            .replace('{{rulesCount}}', rulesCount)
+            .replace('{{rulesWord}}', getRulesWord(rulesCount));
         
-        // Добавляем data-id для идентификации
-        specCard.dataset.specId = spec.id;
+        // Создаем DOM элемент из HTML строки
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = cardHtml;
+        const card = tempDiv.firstElementChild;
         
         // Подсвечиваем, если выбрана
         if (spec.id === selectedSpecId) {
-            specCard.classList.add('selected');
+            card.classList.add('selected');
         }
         
-        // Обработчики событий
-        setupSpecCardHandlers(specCard, spec);
+        // Добавляем обработчики (функция остается без изменений)
+        setupSpecCardHandlers(card, spec);
         
-        specList.appendChild(specCard);
+        specList.appendChild(card);
     });
 }
 

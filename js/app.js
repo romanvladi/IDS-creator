@@ -27,9 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateInfoFromCurrent();
     renderSpecifications();
     
-    // Загружаем пример для демонстрации (можно будет загрузить позже)
-    // loadExampleFile('examples/1-ravno-ili-ravno.xml');
-    
     // Настраиваем обработчики событий
     setupEventListeners();
 
@@ -185,9 +182,6 @@ function updateInfoFromForm() {
     currentIDS.info.version = document.getElementById('infoIfcVersion').value;
     currentIDS.info.date = document.getElementById('infoDate').value;
     currentIDS.info.copyright = document.getElementById('infoCopyright').value;
-    
-    // Обновляем имя в шапке
-    //document.querySelector('.filename').value = currentIDS.info.title;
 }
 
 /**
@@ -220,8 +214,6 @@ function addNewSpecification() {
     // Выделяем новую спецификацию для редактирования
     selectSpecification(newSpec.id);
 }
-
-// js/app.js (продолжение)
 
 /**
  * Отрисовывает список спецификаций
@@ -387,8 +379,6 @@ function deleteSpecification(specId) {
         renderSpecifications();
     }
 }
-
-// js/app.js (продолжение)
 
 /**
  * Отрисовывает редактор для выбранной спецификации
@@ -627,8 +617,6 @@ function getCardinalityClass(cardinality) {
     return '';
 }
 
-// js/app.js (продолжение)
-
 /**
  * Настраивает обработчики вкладок
  */
@@ -674,6 +662,9 @@ function addApplicabilityRule(specId) {
     
     // Перерисовываем редактор
     renderSpecEditor(spec);
+
+    // Перерисовываем карточки(обновляем счетчики)
+    renderSpecifications();
 }
 
 /**
@@ -701,6 +692,9 @@ function addRequirementRule(specId) {
     
     // Перерисовываем редактор
     renderSpecEditor(spec);
+
+    // Перерисовываем карточки(обновляем счетчики)
+    renderSpecifications();
 }
 
 /**
@@ -852,7 +846,7 @@ function loadExampleFile(filename) {
         });
 }
 
-// ===== ШАГ 11: Растягиваемая правая панель =====
+// ===== Растягиваемая правая панель =====
 
 let isResizing = false;
 let startX = 0;

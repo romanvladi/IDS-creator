@@ -9,3 +9,7 @@
 "C:\My Files\CODE\IDS creator\js\app.js"
 "C:\My Files\CODE\IDS creator\js\ids-generator.js"
 "C:\My Files\CODE\IDS creator\js\ids-parser.js"
+"C:\My Files\CODE\IDS creator\templates\spec-card.html"
+"C:\My Files\CODE\IDS creator\templates\empty-state.html"
+"C:\My Files\CODE\IDS creator\templates\editor-tabs.html"
+"C:\My Files\CODE\IDS creator\templates\applicability-rule.html"

@@ -508,8 +508,6 @@ function renderApplicabilityRule(rule, index) {
  * Отрисовывает одно правило requirements
  */
 function renderRequirementsRule(rule, index) {
-    console.log('Rule cardinality:', rule.cardinality); // ВРЕМЕННО
-    
     if (!requirementsRuleTemplate) {
         console.error('Шаблон requirements не загружен');
         return '<div class="error">Ошибка загрузки шаблона</div>';
@@ -522,23 +520,23 @@ function renderRequirementsRule(rule, index) {
         field: rule.field || '',
         cardinalityClass: getCardinalityClass(rule.cardinality),
         
-        // Для селекта кардинальности
+        // Кардинальность - selected
         requiredSelected: (rule.cardinality === 'Обязательно' || rule.cardinality === 'required') ? 'selected' : '',
         optionalSelected: (rule.cardinality === 'Опционально' || rule.cardinality === 'optional') ? 'selected' : '',
         prohibitedSelected: (rule.cardinality === 'Запрещено' || rule.cardinality === 'prohibited') ? 'selected' : '',
         
-        // Для селекта типа данных
-        isText: rule.dataType === 'IFCTEXT' || !rule.dataType,
-        isInteger: rule.dataType === 'IFCINTEGER',
-        isReal: rule.dataType === 'IFCREAL',
-        isBoolean: rule.dataType === 'IFCBOOLEAN',
+        // Тип данных - selected
+        textSelected: (rule.dataType === 'IFCTEXT' || !rule.dataType) ? 'selected' : '',
+        integerSelected: rule.dataType === 'IFCINTEGER' ? 'selected' : '',
+        realSelected: rule.dataType === 'IFCREAL' ? 'selected' : '',
+        booleanSelected: rule.dataType === 'IFCBOOLEAN' ? 'selected' : '',
         
-        // Для селекта условия
-        isEquals: rule.condition === 'equals',
-        isStartsWith: rule.condition === 'startsWith',
-        isContains: rule.condition === 'contains',
-        isEndsWith: rule.condition === 'endsWith',
-        isIn: rule.condition === 'in',
+        // Условие - selected
+        equalsSelected: rule.condition === 'equals' ? 'selected' : '',
+        startsWithSelected: rule.condition === 'startsWith' ? 'selected' : '',
+        containsSelected: rule.condition === 'contains' ? 'selected' : '',
+        endsWithSelected: rule.condition === 'endsWith' ? 'selected' : '',
+        inSelected: rule.condition === 'in' ? 'selected' : '',
         
         // Поле ввода значения (пока оставляем старую функцию)
         valueInput: renderValueInput(rule)

@@ -23,20 +23,20 @@
         <div class="rule-field">
             <label>Тип данных</label>
             <select onchange="updateDataType(this, {{index}})">
-                <option value="IFCTEXT" {{#if isText}}selected{{/if}}>Текст (строка)</option>
-                <option value="IFCINTEGER" {{#if isInteger}}selected{{/if}}>Целое число</option>
-                <option value="IFCREAL" {{#if isReal}}selected{{/if}}>Дробное число</option>
-                <option value="IFCBOOLEAN" {{#if isBoolean}}selected{{/if}}>Да/Нет</option>
+                <option value="IFCTEXT" {{textSelected}}>Текст (строка)</option>
+                <option value="IFCINTEGER" {{integerSelected}}>Целое число</option>
+                <option value="IFCREAL" {{realSelected}}>Дробное число</option>
+                <option value="IFCBOOLEAN" {{booleanSelected}}>Да/Нет</option>
             </select>
         </div>
         <div class="rule-field">
             <label>Условие</label>
             <select onchange="updateRuleCondition(this, 'requirements', {{index}})">
-                <option value="equals" {{#if isEquals}}selected{{/if}}>Равно</option>
-                <option value="startsWith" {{#if isStartsWith}}selected{{/if}}>Начинается с</option>
-                <option value="contains" {{#if isContains}}selected{{/if}}>Содержит</option>
-                <option value="endsWith" {{#if isEndsWith}}selected{{/if}}>Заканчивается на</option>
-                <option value="in" {{#if isIn}}selected{{/if}}>Одно из списка</option>
+                <option value="equals" {{equalsSelected}}>Равно</option>
+                <option value="startsWith" {{startsWithSelected}}>Начинается с</option>
+                <option value="contains" {{containsSelected}}>Содержит</option>
+                <option value="endsWith" {{endsWithSelected}}>Заканчивается на</option>
+                <option value="in" {{inSelected}}>Одно из списка</option>
             </select>
         </div>
         <div class="rule-field">

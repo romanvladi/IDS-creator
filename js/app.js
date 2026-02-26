@@ -737,14 +737,23 @@ function updateRuleCondition(select, ruleType, index) {
 
 /**
  * Обновить значение правила
+ * @param {HTMLInputElement} input - поле ввода
+ * @param {string} ruleType - тип правила ('applicability' или 'requirements')
+ * @param {number} index - индекс правила в массиве
  */
-function updateRuleValue(input) {
+function updateRuleValue(input, ruleType, index) {
     const spec = currentIDS.specifications.find(s => s.id === selectedSpecId);
     if (!spec) return;
     
-    // Определяем, какое правило редактируется (сложно без контекста, упростим)
-    // В реальном приложении нужно передавать больше контекста
-    console.warn('updateRuleValue требует доработки - нужно знать индекс');
+    // Получаем нужный массив правил
+    const rules = ruleType === 'applicability' ? spec.applicability.rules : spec.requirements.rules;
+    if (!rules || !rules[index]) return;
+    
+    // Обновляем значение
+    rules[index].value = input.value;
+    
+    // Для отладки (можно потом убрать)
+    console.log(`Обновлено правило ${ruleType}[${index}].value =`, input.value);
 }
 
 /**

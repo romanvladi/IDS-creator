@@ -22,12 +22,15 @@
         </div>
         <div class="rule-field">
             <label>Тип данных</label>
-            <select onchange="updateDataType(this, {{index}})">
-                <option value="IFCTEXT" {{textSelected}}>Текст (строка)</option>
-                <option value="IFCINTEGER" {{integerSelected}}>Целое число</option>
-                <option value="IFCREAL" {{realSelected}}>Дробное число</option>
-                <option value="IFCBOOLEAN" {{booleanSelected}}>Да/Нет</option>
-            </select>
+            <input type="text" 
+                class="value-input" 
+                list="ifcDataTypes-{{index}}"
+                value="{{dataType}}" 
+                placeholder="Выберите или введите тип данных"
+                onchange="updateDataType(this, {{index}})">
+            <datalist id="ifcDataTypes-{{index}}">
+                {{dataTypeOptions}}
+            </datalist>
         </div>
         <div class="rule-field">
             <label>Условие</label>

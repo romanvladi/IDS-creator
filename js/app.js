@@ -25,6 +25,12 @@ let valueInputSimpleTemplate = null;
 let valueInputEnumTemplate = null;
 let valueInputEnumItemTemplate = null;
 
+// Данные из JSON
+let ifcClasses = {};        // объект с классами IFC
+let ifcDataTypes = {};      // объект с типами данных
+let ifcClassesLoaded = false;
+let ifcDataTypesLoaded = false;
+
 // Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', async () => {
     // Инициализируем парсер
@@ -36,8 +42,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Заполняем информацию о файле
     updateInfoFromCurrent();
 
-    //Загружаем (ждем) шаблон перед отрисовкой
+    //Загружаем (ждем) шаблоны html
     await loadTemplates();
+
+    //Загружаем (ждем) файлы JSON
+    await loadJSONData();  // ← добавляем
 
     //отрисовываем карточки
     renderSpecifications();
@@ -102,6 +111,28 @@ async function loadTemplates() {
 
     const response8 = await fetch('templates/value-input-enum-item.html');
     valueInputEnumItemTemplate = await response8.text();
+}
+
+/**
+ * Загружает JSON-данные
+ */
+async function loadJSONData() {
+    try {
+        // Загружаем классы IFC
+        const classesResponse = await fetch('data/ifc-classes.json');
+        ifcClasses = await classesResponse.json();
+        ifcClassesLoaded = true;
+        console.log('✅ Загружено классов IFC:', Object.keys(ifcClasses).length);
+        
+        // Загружаем типы данных
+        const typesResponse = await fetch('data/ifc-data-types.json');
+        ifcDataTypes = await typesResponse.json();
+        ifcDataTypesLoaded = true;
+        console.log('✅ Загружено типов данных:', Object.keys(ifcDataTypes).length);
+        
+    } catch (error) {
+        console.error('❌ Ошибка загрузки JSON:', error);
+    }
 }
 
 /**
@@ -522,23 +553,27 @@ function renderRequirementsRule(rule, index) {
         return '<div class="error">Ошибка загрузки шаблона</div>';
     }
     
+    // Генерируем options для datalist
+    let dataTypeOptions = '';
+    if (ifcDataTypesLoaded) {
+        for (const [typeName, typeDescription] of Object.entries(ifcDataTypes)) {
+            dataTypeOptions += `<option value="${typeName}">${typeDescription}</option>`;
+        }
+    }
+
     // Подготавливаем данные для шаблона
     const data = {
         index: index,
         propertySet: rule.propertySet || '',
         field: rule.field || '',
         cardinalityClass: getCardinalityClass(rule.cardinality),
+        dataType: rule.dataType || 'IFCTEXT',  // добавляем текущее значение
+        dataTypeOptions: dataTypeOptions,       // добавляем options
         
         // Кардинальность - selected
         requiredSelected: (rule.cardinality === 'Обязательно' || rule.cardinality === 'required') ? 'selected' : '',
         optionalSelected: (rule.cardinality === 'Опционально' || rule.cardinality === 'optional') ? 'selected' : '',
         prohibitedSelected: (rule.cardinality === 'Запрещено' || rule.cardinality === 'prohibited') ? 'selected' : '',
-        
-        // Тип данных - selected
-        textSelected: (rule.dataType === 'IFCTEXT' || !rule.dataType) ? 'selected' : '',
-        integerSelected: rule.dataType === 'IFCINTEGER' ? 'selected' : '',
-        realSelected: rule.dataType === 'IFCREAL' ? 'selected' : '',
-        booleanSelected: rule.dataType === 'IFCBOOLEAN' ? 'selected' : '',
         
         // Условие - selected
         equalsSelected: rule.condition === 'equals' ? 'selected' : '',
@@ -559,47 +594,59 @@ function renderRequirementsRule(rule, index) {
  * Отрисовывает поле ввода значения в зависимости от типа условия
  */
 function renderValueInput(rule, ruleType = 'requirements', index = 0) {
+    // Для перечислений (условие 'in') показываем список
     if (rule.condition === 'in' && Array.isArray(rule.value)) {
-        // Для перечислений показываем список
-        if (!valueInputEnumTemplate) {
-            console.error('Шаблон enum не загружен');
+        if (!valueInputEnumTemplate || !valueInputEnumItemTemplate) {
+            console.error('Шаблоны enum не загружены');
             return '<div>Ошибка загрузки шаблона</div>';
         }
-
-        // Проверяем, что шаблон загружен
-        if (!valueInputEnumItemTemplate) {
-            console.error('Шаблон элемента enum не загружен');
-            return '<div>Ошибка загрузки шаблона</div>';
-        }
-        // Генерируем список значений, используя шаблон для каждого элемента
+        
         let valuesListHtml = '';
         rule.value.forEach((val, idx) => {
             valuesListHtml += replacePlaceholders(valueInputEnumItemTemplate, {
                 value: val,
                 ruleIndex: index,
                 itemIndex: idx
-    });
-});
+            });
+        });
         
-        // Заменяем плейсхолдеры в шаблоне
-        let result = valueInputEnumTemplate
-            .replace(/{{index}}/g, index.toString())  // /g означает "глобально" - все вхождения
+        return valueInputEnumTemplate
+            .replace(/{{index}}/g, index.toString())
             .replace('{{valuesList}}', valuesListHtml);
-        return result;
-
-        
-    } else {
-        // Обычное текстовое поле
-        if (!valueInputSimpleTemplate) {
-            console.error('Шаблон simple value не загружен');
-            return '<input type="text" class="value-input">';
-        }
-        
-        return valueInputSimpleTemplate
-            .replace('{{value}}', rule.value || '')
-            .replace('{{ruleType}}', ruleType)
-            .replace('{{index}}', index);
     }
+    
+    // Обычное текстовое поле
+    if (!valueInputSimpleTemplate) {
+        console.error('Шаблон simple value не загружен');
+        return '<input type="text" class="value-input">';
+    }
+    
+    // Базовый HTML из шаблона
+    let inputHtml = valueInputSimpleTemplate
+        .replace('{{value}}', rule.value || '')
+        .replace('{{ruleType}}', ruleType)
+        .replace('{{index}}', index);
+    
+    // Если это entity в applicability - добавляем datalist с классами IFC
+    if (ruleType === 'applicability' && rule.type === 'entity' && ifcClassesLoaded) {
+        // Добавляем атрибут list к input
+        inputHtml = inputHtml.replace(
+            'class="value-input"',
+            `class="value-input" list="ifcClasses-${index}"`
+        );
+        
+        // Создаем datalist с классами IFC
+        let datalistHtml = `<datalist id="ifcClasses-${index}">`;
+        for (const [className, classDescription] of Object.entries(ifcClasses)) {
+            datalistHtml += `<option value="${className}">${classDescription}</option>`;
+        }
+        datalistHtml += '</datalist>';
+        
+        // Добавляем datalist после input
+        inputHtml += datalistHtml;
+    }
+    
+    return inputHtml;
 }
 
 /**

@@ -581,7 +581,7 @@ function renderValueInput(rule, ruleType = 'requirements', index = 0) {
     });
 });
         
-        // Заменяем плейсхолдеры в шаблоне;
+        // Заменяем плейсхолдеры в шаблоне
         let result = valueInputEnumTemplate
             .replace(/{{index}}/g, index.toString())  // /g означает "глобально" - все вхождения
             .replace('{{valuesList}}', valuesListHtml);
@@ -599,27 +599,6 @@ function renderValueInput(rule, ruleType = 'requirements', index = 0) {
             .replace('{{value}}', rule.value || '')
             .replace('{{ruleType}}', ruleType)
             .replace('{{index}}', index);
-    }
-}
-
-/**
- * Возвращает опции для условия в зависимости от типа правила
- */
-function getConditionOptions(ruleType) {
-    if (ruleType === 'entity') {
-        // Для сущностей обычно только равенство
-        return `
-            <option value="equals" selected>Равно</option>
-        `;
-    } else {
-        // Для атрибутов и свойств - разные условия
-        return `
-            <option value="equals">Равно</option>
-            <option value="startsWith">Начинается с</option>
-            <option value="contains">Содержит</option>
-            <option value="endsWith">Заканчивается на</option>
-            <option value="in">Одно из списка</option>
-        `;
     }
 }
 

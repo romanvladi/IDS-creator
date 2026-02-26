@@ -1,0 +1,47 @@
+<!-- templates/requirements-rule.html -->
+<div class="rule-card" data-rule-type="requirements" data-rule-index="{{index}}">
+    <div class="rule-card-header">
+        <span class="rule-type-badge">Свойство</span>
+        <select class="rule-cardinality {{cardinalityClass}}" onchange="updateCardinality(this, {{index}})">
+            <option value="required" {{requiredSelected}}>Обязательно</option>
+            <option value="optional" {{optionalSelected}}>Опционально</option>
+            <option value="prohibited" {{prohibitedSelected}}>Запрещено</option>
+        </select>
+        <button class="icon-btn" onclick="removeRule('requirements', {{index}})" title="Удалить">✕</button>
+    </div>
+    <div class="rule-fields">
+        <div class="rule-field">
+            <label>PropertySet</label>
+            <input type="text" value="{{propertySet}}" placeholder="Например: ExpCheck_Wall"
+                   onchange="updatePropertySet(this, {{index}})">
+        </div>
+        <div class="rule-field">
+            <label>Имя свойства</label>
+            <input type="text" value="{{field}}" placeholder="Например: MGE_ElementCode"
+                   onchange="updateRuleField(this, 'requirements', {{index}})">
+        </div>
+        <div class="rule-field">
+            <label>Тип данных</label>
+            <select onchange="updateDataType(this, {{index}})">
+                <option value="IFCTEXT" {{#if isText}}selected{{/if}}>Текст (строка)</option>
+                <option value="IFCINTEGER" {{#if isInteger}}selected{{/if}}>Целое число</option>
+                <option value="IFCREAL" {{#if isReal}}selected{{/if}}>Дробное число</option>
+                <option value="IFCBOOLEAN" {{#if isBoolean}}selected{{/if}}>Да/Нет</option>
+            </select>
+        </div>
+        <div class="rule-field">
+            <label>Условие</label>
+            <select onchange="updateRuleCondition(this, 'requirements', {{index}})">
+                <option value="equals" {{#if isEquals}}selected{{/if}}>Равно</option>
+                <option value="startsWith" {{#if isStartsWith}}selected{{/if}}>Начинается с</option>
+                <option value="contains" {{#if isContains}}selected{{/if}}>Содержит</option>
+                <option value="endsWith" {{#if isEndsWith}}selected{{/if}}>Заканчивается на</option>
+                <option value="in" {{#if isIn}}selected{{/if}}>Одно из списка</option>
+            </select>
+        </div>
+        <div class="rule-field">
+            <label>Значение</label>
+            {{valueInput}}
+        </div>
+    </div>
+</div>

@@ -20,6 +20,7 @@ let specCardTemplate = null; // возможно нужно изменить н�
 let emptyStateTemplate = null; // возможно нужно изменить на = '';
 let editorTabsTemplate = null; // возможно нужно изменить на = '';
 let applicabilityRuleTemplate = null; // возможно нужно изменить на = '';
+let requirementsRuleTemplate = null; // возможно нужно изменить на = '';
 
 // Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', async () => {
@@ -86,6 +87,9 @@ async function loadTemplates() {
 
     const response4 = await fetch('templates/applicability-rule.html');
     applicabilityRuleTemplate = await response4.text();
+
+    const response5 = await fetch('templates/requirements-rule.html');
+    requirementsRuleTemplate = await response5.text();
 }
 
 /**
@@ -317,6 +321,21 @@ function getRulesWord(count) {
 }
 
 /**
+ * Простая замена плейсхолдеров в шаблоне
+ * @param {string} template - HTML шаблон с плейсхолдерами {{key}}
+ * @param {Object} data - объект с данными для замены
+ * @returns {string}
+ */
+function replacePlaceholders(template, data) {
+    let result = template;
+    for (const [key, value] of Object.entries(data)) {
+        const placeholder = new RegExp('{{' + key + '}}', 'g');
+        result = result.replace(placeholder, value !== undefined ? value : '');
+    }
+    return result;
+}
+
+/**
  * Настраивает обработчики для карточки спецификации
  */
 function setupSpecCardHandlers(card, spec) {
@@ -489,62 +508,44 @@ function renderApplicabilityRule(rule, index) {
  * Отрисовывает одно правило requirements
  */
 function renderRequirementsRule(rule, index) {
-    let cardinalityOptions = `
-        <option value="required" ${rule.cardinality === 'Обязательно' || rule.cardinality === 'required' ? 'selected' : ''}>Обязательно</option>
-        <option value="optional" ${rule.cardinality === 'Опционально' || rule.cardinality === 'optional' ? 'selected' : ''}>Опционально</option>
-        <option value="prohibited" ${rule.cardinality === 'Запрещено' || rule.cardinality === 'prohibited' ? 'selected' : ''}>Запрещено</option>
-    `;
+    console.log('Rule cardinality:', rule.cardinality); // ВРЕМЕННО
     
-    let dataTypeOptions = '';
-    // Здесь мы заполним типы данных позже, когда загрузим JSON
+    if (!requirementsRuleTemplate) {
+        console.error('Шаблон requirements не загружен');
+        return '<div class="error">Ошибка загрузки шаблона</div>';
+    }
     
-    return `
-        <div class="rule-card" data-rule-type="requirements" data-rule-index="${index}">
-            <div class="rule-card-header">
-                <span class="rule-type-badge">Свойство</span>
-                <select class="rule-cardinality ${getCardinalityClass(rule.cardinality)}" 
-                        onchange="updateCardinality(this, ${index})">
-                    ${cardinalityOptions}
-                </select>
-                <button class="icon-btn" onclick="removeRule('requirements', ${index})" title="Удалить">✕</button>
-            </div>
-            <div class="rule-fields">
-                <div class="rule-field">
-                    <label>PropertySet</label>
-                    <input type="text" value="${rule.propertySet || ''}" placeholder="Например: ExpCheck_Wall"
-                           onchange="updatePropertySet(this, ${index})">
-                </div>
-                <div class="rule-field">
-                    <label>Имя свойства</label>
-                    <input type="text" value="${rule.field || ''}" placeholder="Например: MGE_ElementCode"
-                           onchange="updateRuleField(this, 'requirements', ${index})">
-                </div>
-                <div class="rule-field">
-                    <label>Тип данных</label>
-                    <select onchange="updateDataType(this, ${index})">
-                        <option value="IFCTEXT">Текст (строка)</option>
-                        <option value="IFCINTEGER">Целое число</option>
-                        <option value="IFCREAL">Дробное число</option>
-                        <option value="IFCBOOLEAN">Да/Нет</option>
-                    </select>
-                </div>
-                <div class="rule-field">
-                    <label>Условие</label>
-                    <select onchange="updateRuleCondition(this, 'requirements', ${index})">
-                        <option value="equals" ${rule.condition === 'equals' ? 'selected' : ''}>Равно</option>
-                        <option value="startsWith" ${rule.condition === 'startsWith' ? 'selected' : ''}>Начинается с</option>
-                        <option value="contains" ${rule.condition === 'contains' ? 'selected' : ''}>Содержит</option>
-                        <option value="endsWith" ${rule.condition === 'endsWith' ? 'selected' : ''}>Заканчивается на</option>
-                        <option value="in" ${rule.condition === 'in' ? 'selected' : ''}>Одно из списка</option>
-                    </select>
-                </div>
-                <div class="rule-field">
-                    <label>Значение</label>
-                    ${renderValueInput(rule)}
-                </div>
-            </div>
-        </div>
-    `;
+    // Подготавливаем данные для шаблона
+    const data = {
+        index: index,
+        propertySet: rule.propertySet || '',
+        field: rule.field || '',
+        cardinalityClass: getCardinalityClass(rule.cardinality),
+        
+        // Для селекта кардинальности
+        requiredSelected: (rule.cardinality === 'Обязательно' || rule.cardinality === 'required') ? 'selected' : '',
+        optionalSelected: (rule.cardinality === 'Опционально' || rule.cardinality === 'optional') ? 'selected' : '',
+        prohibitedSelected: (rule.cardinality === 'Запрещено' || rule.cardinality === 'prohibited') ? 'selected' : '',
+        
+        // Для селекта типа данных
+        isText: rule.dataType === 'IFCTEXT' || !rule.dataType,
+        isInteger: rule.dataType === 'IFCINTEGER',
+        isReal: rule.dataType === 'IFCREAL',
+        isBoolean: rule.dataType === 'IFCBOOLEAN',
+        
+        // Для селекта условия
+        isEquals: rule.condition === 'equals',
+        isStartsWith: rule.condition === 'startsWith',
+        isContains: rule.condition === 'contains',
+        isEndsWith: rule.condition === 'endsWith',
+        isIn: rule.condition === 'in',
+        
+        // Поле ввода значения (пока оставляем старую функцию)
+        valueInput: renderValueInput(rule)
+    };
+    
+    // Заменяем плейсхолдеры
+    return replacePlaceholders(requirementsRuleTemplate, data);
 }
 
 /**

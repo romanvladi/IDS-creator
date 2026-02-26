@@ -708,6 +708,58 @@ function updateRuleField(input, ruleType, index) {
 }
 
 /**
+ * Изменить тип правила applicability
+ * @param {HTMLSelectElement} select - выпадающий список
+ * @param {string} ruleType - всегда 'applicability'
+ * @param {number} index - индекс правила
+ */
+function changeRuleType(select, ruleType, index) {
+    const spec = currentIDS.specifications.find(s => s.id === selectedSpecId);
+    if (!spec) return;
+    
+    const newType = select.value; // 'entity', 'attribute' или 'property'
+    const rules = spec.applicability.rules;
+    if (!rules || !rules[index]) return;
+    
+    const rule = rules[index];
+    const oldType = rule.type;
+    
+    // Если тип не изменился — ничего не делаем
+    if (oldType === newType) return;
+    
+    // Меняем тип
+    rule.type = newType;
+    
+    // Сбрасываем поля в зависимости от нового типа
+    switch (newType) {
+        case 'entity':
+            rule.field = 'name';
+            rule.displayType = 'Сущность IFC';
+            // Для сущности значение по умолчанию
+            if (!rule.value) rule.value = 'IfcWall';
+            break;
+            
+        case 'attribute':
+            rule.field = '';
+            rule.displayType = 'Атрибут';
+            rule.value = '';
+            break;
+            
+        case 'property':
+            rule.field = '';
+            rule.displayType = 'Свойство';
+            rule.value = '';
+            break;
+    }
+    
+    // Перерисовываем редактор, чтобы обновились поля
+    renderSpecEditor(spec);
+    
+    // Для отладки
+    console.log(`Правило ${index} изменено с ${oldType} на ${newType}`);
+}
+
+/**
  * Обновить условие правила
  */
 function updateRuleCondition(select, ruleType, index) {

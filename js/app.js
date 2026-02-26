@@ -23,6 +23,7 @@ let applicabilityRuleTemplate = null; // возможно нужно измен�
 let requirementsRuleTemplate = null; // возможно нужно изменить на = '';
 let valueInputSimpleTemplate = null;
 let valueInputEnumTemplate = null;
+let valueInputEnumItemTemplate = null;
 
 // Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', async () => {
@@ -98,6 +99,9 @@ async function loadTemplates() {
 
     const response7 = await fetch('templates/value-input-enum.html');
     valueInputEnumTemplate = await response7.text();
+
+    const response8 = await fetch('templates/value-input-enum-item.html');
+    valueInputEnumItemTemplate = await response8.text();
 }
 
 /**
@@ -565,17 +569,20 @@ function renderValueInput(rule, ruleType = 'requirements', index = 0) {
             return '<div>Ошибка загрузки шаблона</div>';
         }
 
-        // Генерируем список значений
+        // Проверяем, что шаблон загружен
+        if (!valueInputEnumItemTemplate) {
+            console.error('Шаблон элемента enum не загружен');
+            return '<div>Ошибка загрузки шаблона</div>';
+        }
+        // Генерируем список значений, используя шаблон для каждого элемента
         let valuesListHtml = '';
         rule.value.forEach((val, idx) => {
-            valuesListHtml += `
-                <div class="value-item">
-                    <input type="text" value="${val}" 
-                           onchange="updateEnumValue(this, ${index}, ${idx})">
-                    <button class="remove-value" onclick="removeEnumValue(${index}, ${idx})">✕</button>
-                </div>
-            `;
-        });
+            valuesListHtml += replacePlaceholders(valueInputEnumItemTemplate, {
+                value: val,
+                ruleIndex: index,
+                itemIndex: idx
+    });
+});
         
         // Заменяем плейсхолдеры в шаблоне;
         let result = valueInputEnumTemplate

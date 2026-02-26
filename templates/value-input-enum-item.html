@@ -1,0 +1,6 @@
+<!-- templates/value-input-enum-item.html -->
+<div class="value-item">
+    <input type="text" value="{{value}}" 
+           onchange="updateEnumValue(this, {{ruleIndex}}, {{itemIndex}})">
+    <button class="remove-value" onclick="removeEnumValue({{ruleIndex}}, {{itemIndex}})">✕</button>
+</div>

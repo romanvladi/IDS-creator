@@ -1,3 +1,4 @@
+<!-- templates/applicability-rule.html -->
 <div class="rule-card" data-rule-type="applicability" data-rule-index="{{index}}">
     <div class="rule-card-header">
         <span class="rule-type-badge">{{displayType}}</span>
@@ -7,9 +8,9 @@
         <div class="rule-field">
             <label>Тип правила</label>
             <select onchange="changeRuleType(this, 'applicability', {{index}})">
-                <option value="entity" {{#if isEntity}}selected{{/if}}>Сущность IFC</option>
-                <option value="attribute" {{#if isAttribute}}selected{{/if}}>Атрибут</option>
-                <option value="property" {{#if isProperty}}selected{{/if}}>Свойство</option>
+                <option value="entity" {{entitySelected}}>Сущность IFC</option>
+                <option value="attribute" {{attributeSelected}}>Атрибут</option>
+                <option value="property" {{propertySelected}}>Свойство</option>
             </select>
         </div>
         <div class="rule-field">
@@ -20,7 +21,7 @@
         <div class="rule-field">
             <label>Условие</label>
             <select onchange="updateRuleCondition(this, 'applicability', {{index}})">
-                {{conditionOptions}}
+                <option value="equals" selected>Равно</option>
             </select>
         </div>
         <div class="rule-field">

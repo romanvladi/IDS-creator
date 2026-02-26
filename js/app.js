@@ -496,24 +496,21 @@ function renderApplicabilityRule(rule, index) {
         return '<div class="error">Ошибка загрузки шаблона</div>';
     }
     
-    // Для applicability только "равно" (скрытое поле или задизейбленное)
-    const conditionOptions = '<option value="equals" selected>Равно</option>';
-    
-    // Генерируем поле ввода значения
-    const valueInput = renderValueInput(rule, 'applicability', index);
+    // Подготавливаем данные для шаблона
+    const data = {
+        index: index,
+        displayType: rule.displayType || 'Правило',
+        field: rule.field || '',
+        valueInput: renderValueInput(rule, 'applicability', index),
+        
+        // Selected для типа правила
+        entitySelected: rule.type === 'entity' ? 'selected' : '',
+        attributeSelected: rule.type === 'attribute' ? 'selected' : '',
+        propertySelected: rule.type === 'property' ? 'selected' : ''
+    };
     
     // Заменяем плейсхолдеры
-    let html = applicabilityRuleTemplate
-        .replace(/{{index}}/g, index)
-        .replace('{{displayType}}', rule.displayType || 'Правило')
-        .replace('{{field}}', rule.field || '')
-        .replace('{{conditionOptions}}', conditionOptions)
-        .replace('{{valueInput}}', valueInput)
-        .replace('{{#if isEntity}}', rule.type === 'entity' ? 'selected' : '')
-        .replace('{{#if isAttribute}}', rule.type === 'attribute' ? 'selected' : '')
-        .replace('{{#if isProperty}}', rule.type === 'property' ? 'selected' : '');
-    
-    return html;
+    return replacePlaceholders(applicabilityRuleTemplate, data);
 }
 
 /**

@@ -21,6 +21,8 @@ let emptyStateTemplate = null; // возможно нужно изменить �
 let editorTabsTemplate = null; // возможно нужно изменить на = '';
 let applicabilityRuleTemplate = null; // возможно нужно изменить на = '';
 let requirementsRuleTemplate = null; // возможно нужно изменить на = '';
+let valueInputSimpleTemplate = null;
+let valueInputEnumTemplate = null;
 
 // Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', async () => {
@@ -90,6 +92,12 @@ async function loadTemplates() {
 
     const response5 = await fetch('templates/requirements-rule.html');
     requirementsRuleTemplate = await response5.text();
+
+    const response6 = await fetch('templates/value-input-simple.html');
+    valueInputSimpleTemplate = await response6.text();
+
+    const response7 = await fetch('templates/value-input-enum.html');
+    valueInputEnumTemplate = await response7.text();
 }
 
 /**
@@ -488,7 +496,7 @@ function renderApplicabilityRule(rule, index) {
     const conditionOptions = '<option value="equals" selected>Равно</option>';
     
     // Генерируем поле ввода значения
-    const valueInput = renderValueInput(rule);
+    const valueInput = renderValueInput(rule, 'applicability', index);
     
     // Заменяем плейсхолдеры
     let html = applicabilityRuleTemplate
@@ -539,7 +547,7 @@ function renderRequirementsRule(rule, index) {
         inSelected: rule.condition === 'in' ? 'selected' : '',
         
         // Поле ввода значения (пока оставляем старую функцию)
-        valueInput: renderValueInput(rule)
+        valueInput: renderValueInput(rule, 'requirements', index)
     };
     
     // Заменяем плейсхолдеры
@@ -549,26 +557,44 @@ function renderRequirementsRule(rule, index) {
 /**
  * Отрисовывает поле ввода значения в зависимости от типа условия
  */
-function renderValueInput(rule) {
+function renderValueInput(rule, ruleType = 'requirements', index = 0) {
     if (rule.condition === 'in' && Array.isArray(rule.value)) {
         // Для перечислений показываем список
-        let valuesHtml = '<div class="values-list">';
+        if (!valueInputEnumTemplate) {
+            console.error('Шаблон enum не загружен');
+            return '<div>Ошибка загрузки шаблона</div>';
+        }
+
+        // Генерируем список значений
+        let valuesListHtml = '';
         rule.value.forEach((val, idx) => {
-            valuesHtml += `
+            valuesListHtml += `
                 <div class="value-item">
                     <input type="text" value="${val}" 
-                           onchange="updateEnumValue(this, ${idx})">
-                    <button class="remove-value" onclick="removeEnumValue(${idx})">✕</button>
+                           onchange="updateEnumValue(this, ${index}, ${idx})">
+                    <button class="remove-value" onclick="removeEnumValue(${index}, ${idx})">✕</button>
                 </div>
             `;
         });
-        valuesHtml += '</div>';
-        valuesHtml += '<button class="add-value" onclick="addEnumValue()">+ Добавить значение</button>';
-        return valuesHtml;
+        
+        // Заменяем плейсхолдеры в шаблоне;
+        let result = valueInputEnumTemplate
+            .replace(/{{index}}/g, index.toString())  // /g означает "глобально" - все вхождения
+            .replace('{{valuesList}}', valuesListHtml);
+        return result;
+
+        
     } else {
         // Обычное текстовое поле
-        return `<input type="text" class="value-input" value="${rule.value || ''}" 
-                       placeholder="Значение" onchange="updateRuleValue(this)">`;
+        if (!valueInputSimpleTemplate) {
+            console.error('Шаблон simple value не загружен');
+            return '<input type="text" class="value-input">';
+        }
+        
+        return valueInputSimpleTemplate
+            .replace('{{value}}', rule.value || '')
+            .replace('{{ruleType}}', ruleType)
+            .replace('{{index}}', index);
     }
 }
 
@@ -814,6 +840,48 @@ function clearSpecification(specId) {
             renderSpecifications(); // Обновляем счетчики в карточках
         }
     }
+}
+
+/**
+ * Обновить значение в перечислении
+ */
+function updateEnumValue(input, ruleIndex, valueIndex) {
+    const spec = currentIDS.specifications.find(s => s.id === selectedSpecId);
+    if (!spec || !spec.requirements?.rules[ruleIndex]) return;
+    
+    const rule = spec.requirements.rules[ruleIndex];
+    if (Array.isArray(rule.value)) {
+        rule.value[valueIndex] = input.value;
+    }
+}
+
+/**
+ * Удалить значение из перечисления
+ */
+function removeEnumValue(ruleIndex, valueIndex) {
+    const spec = currentIDS.specifications.find(s => s.id === selectedSpecId);
+    if (!spec || !spec.requirements?.rules[ruleIndex]) return;
+    
+    const rule = spec.requirements.rules[ruleIndex];
+    if (Array.isArray(rule.value)) {
+        rule.value.splice(valueIndex, 1);
+        renderSpecEditor(spec);
+    }
+}
+
+/**
+ * Добавить значение в перечисление
+ */
+function addEnumValue(ruleIndex) {
+    const spec = currentIDS.specifications.find(s => s.id === selectedSpecId);
+    if (!spec || !spec.requirements?.rules[ruleIndex]) return;
+    
+    const rule = spec.requirements.rules[ruleIndex];
+    if (!Array.isArray(rule.value)) {
+        rule.value = [];
+    }
+    rule.value.push('');
+    renderSpecEditor(spec);
 }
 
 /**

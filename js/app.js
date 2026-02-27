@@ -16,11 +16,11 @@ let selectedSpecId = null;
 let parser = null;
 
 //Переменные для шаблонов html
-let specCardTemplate = null; // возможно нужно изменить на = '';
-let emptyStateTemplate = null; // возможно нужно изменить на = '';
-let editorTabsTemplate = null; // возможно нужно изменить на = '';
-let applicabilityRuleTemplate = null; // возможно нужно изменить на = '';
-let requirementsRuleTemplate = null; // возможно нужно изменить на = '';
+let specCardTemplate = null;
+let emptyStateTemplate = null;
+let editorTabsTemplate = null;
+let applicabilityRuleTemplate = null;
+let requirementsRuleTemplate = null;
 let valueInputSimpleTemplate = null;
 let valueInputEnumTemplate = null;
 let valueInputEnumItemTemplate = null;
@@ -80,7 +80,6 @@ function setupEventListeners() {
     // Поле имени файла в шапке
     document.querySelector('.filename').addEventListener('input', (e) => {
         currentIDS.info.title = e.target.value;
-        //document.getElementById('infoTitle').value = e.target.value;//убрать
     });
 }
 
@@ -912,13 +911,6 @@ function removeRule(ruleType, index) {
 }
 
 /**
- * Тестировать спецификацию на модели
- */
-function testSpecification(specId) {
-    alert('Функция проверки на IFC-модели будет добавлена позже');
-}
-
-/**
  * Очистить правила спецификации
  */
 function clearSpecification(specId) {
@@ -973,24 +965,6 @@ function addEnumValue(ruleIndex) {
     }
     rule.value.push('');
     renderSpecEditor(spec);
-}
-
-/**
- * Загрузить пример файла (для тестирования)
- */
-function loadExampleFile(filename) {
-    fetch(filename)
-        .then(response => response.text())
-        .then(xmlString => {
-            const parsed = parser.parse(xmlString);
-            currentIDS = parsed;
-            document.querySelector('.filename').value = filename.split('/').pop();
-            updateInfoFromCurrent();
-            renderSpecifications();
-        })
-        .catch(error => {
-            console.error('Ошибка загрузки примера:', error);
-        });
 }
 
 // ===== Растягиваемая правая панель =====

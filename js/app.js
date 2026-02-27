@@ -24,6 +24,7 @@ let requirementsRuleTemplate = null;
 let valueInputSimpleTemplate = null;
 let valueInputEnumTemplate = null;
 let valueInputEnumItemTemplate = null;
+let activeEditorTab = 'applicability'; // запоминает какое окно редактора свойств активное
 
 // Данные из JSON
 let ifcClasses = {};        // объект с классами IFC
@@ -515,6 +516,9 @@ function renderSpecEditor(spec) {
     
     // Добавляем обработчики для переключения вкладок
     setupTabHandlers(spec.id);
+
+    // Активируем сохраненную вкладку
+    activateTab(activeEditorTab);
 }
 
 /**
@@ -667,17 +671,18 @@ function setupTabHandlers(specId) {
     const tabs = document.querySelectorAll('.editor-tab');
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            // Убираем активный класс у всех вкладок
+            const tabName = tab.dataset.tab;
+            
+            // Сохраняем выбранную вкладку
+            activeEditorTab = tabName;
+            
+            // Переключаем отображение
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
             
-            // Прячем все содержимое вкладок
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.style.display = 'none';
             });
-            
-            // Показываем выбранную вкладку
-            const tabName = tab.dataset.tab;
             document.getElementById(`${tabName}-tab`).style.display = 'block';
         });
     });
@@ -965,6 +970,27 @@ function addEnumValue(ruleIndex) {
     }
     rule.value.push('');
     renderSpecEditor(spec);
+}
+
+/**
+ * активация нужной вкладки
+ */
+function activateTab(tabName) {
+    const tabs = document.querySelectorAll('.editor-tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    // Деактивируем все
+    tabs.forEach(t => t.classList.remove('active'));
+    tabContents.forEach(c => c.style.display = 'none');
+    
+    // Активируем нужную
+    const activeTab = document.querySelector(`.editor-tab[data-tab="${tabName}"]`);
+    const activeContent = document.getElementById(`${tabName}-tab`);
+    
+    if (activeTab && activeContent) {
+        activeTab.classList.add('active');
+        activeContent.style.display = 'block';
+    }
 }
 
 // ===== Растягиваемая правая панель =====

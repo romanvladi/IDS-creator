@@ -15,6 +15,17 @@ let currentIDS = {
     specifications: []
 };
 
+// Варианты версий IFC для подсказок (все возможные комбинации)
+const IFC_VERSION_OPTIONS = [
+    'IFC2X3',
+    'IFC4', 
+    'IFC4X3_ADD2',
+    'IFC2X3 IFC4',
+    'IFC2X3 IFC4X3_ADD2',
+    'IFC4 IFC4X3_ADD2',
+    'IFC2X3 IFC4 IFC4X3_ADD2'
+];
+
 let selectedSpecId = null;
 let parser = null;
 
@@ -346,6 +357,12 @@ function renderSpecifications() {
         const entityRule = spec.applicability?.rules?.find(r => r.type === 'entity');
         const entityValue = entityRule ? entityRule.value : 'Нет сущности';
         
+        // Генерируем options для datalist версий IFC
+        let versionOptionsHtml = '';
+        IFC_VERSION_OPTIONS.forEach(version => {
+            versionOptionsHtml += `<option value="${version}">`;
+        });
+        
         // Заменяем плейсхолдеры в шаблоне
         let cardHtml = specCardTemplate
             .replace('{{specId}}', spec.id)
@@ -358,6 +375,12 @@ function renderSpecifications() {
             .replace('{{rulesCount}}', rulesCount)
             .replace('{{rulesWord}}', getRulesWord(rulesCount));
         
+        // Вставляем options в datalist (это костыль, но рабочий)
+        cardHtml = cardHtml.replace(
+            '</datalist>', 
+            versionOptionsHtml + '</datalist>'
+        );
+            
         // Создаем DOM элемент из HTML строки
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = cardHtml;

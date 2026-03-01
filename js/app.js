@@ -7,7 +7,10 @@ let currentIDS = {
         copyright: 'Пользователь',
         version: '1.0.0',
         author: 'user@example.com',
-        date: new Date().toISOString().split('T')[0]
+        date: new Date().toISOString().split('T')[0],
+        description: '',
+        purpose: '',
+        milestone: ''
     },
     specifications: []
 };
@@ -77,6 +80,9 @@ function setupEventListeners() {
     document.getElementById('infoFileVersion').addEventListener('change', updateInfoFromForm);
     document.getElementById('infoDate').addEventListener('change', updateInfoFromForm);
     document.getElementById('infoCopyright').addEventListener('input', updateInfoFromForm);
+    document.getElementById('infoDescription').addEventListener('input', updateInfoFromForm);
+    document.getElementById('infoPurpose').addEventListener('input', updateInfoFromForm);
+    document.getElementById('infoMilestone').addEventListener('input', updateInfoFromForm);
     
     // Поле имени файла в шапке
     document.querySelector('.filename').addEventListener('input', (e) => {
@@ -146,7 +152,10 @@ function createNewFile() {
                 copyright: 'Пользователь',
                 version: '1.0.0',
                 author: 'user@example.com',
-                date: new Date().toISOString().split('T')[0]
+                date: new Date().toISOString().split('T')[0],
+                description: '',
+                purpose: '',
+                milestone: ''
             },
             specifications: []
         };
@@ -243,9 +252,12 @@ function saveFile() {
 function updateInfoFromCurrent() {
     document.getElementById('infoTitle').value = currentIDS.info.title || '';
     document.getElementById('infoAuthor').value = currentIDS.info.author || '';
-    document.getElementById('infoFileVersion').value = currentIDS.info.version || 'IFC4';
+    document.getElementById('infoFileVersion').value = currentIDS.info.version || '1.0.0';
     document.getElementById('infoDate').value = currentIDS.info.date || new Date().toISOString().split('T')[0];
     document.getElementById('infoCopyright').value = currentIDS.info.copyright || 'Пользователь';
+    document.getElementById('infoDescription').value = currentIDS.info.description || '';
+    document.getElementById('infoPurpose').value = currentIDS.info.purpose || '';
+    document.getElementById('infoMilestone').value = currentIDS.info.milestone || '';
 }
 
 /**
@@ -257,6 +269,9 @@ function updateInfoFromForm() {
     currentIDS.info.version = document.getElementById('infoFileVersion').value;
     currentIDS.info.date = document.getElementById('infoDate').value;
     currentIDS.info.copyright = document.getElementById('infoCopyright').value;
+    currentIDS.info.description = document.getElementById('infoDescription').value;
+    currentIDS.info.purpose = document.getElementById('infoPurpose').value;
+    currentIDS.info.milestone = document.getElementById('infoMilestone').value;
 }
 
 /**

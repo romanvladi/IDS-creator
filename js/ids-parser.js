@@ -47,7 +47,10 @@ class IDSParser {
             copyright: this.getTextContent(infoNode, 'copyright') || '',
             version: this.getTextContent(infoNode, 'version') || 'IFC4',
             author: this.getTextContent(infoNode, 'author') || '',
-            date: this.getTextContent(infoNode, 'date') || this.getCurrentDate()
+            date: this.getTextContent(infoNode, 'date') || this.getCurrentDate(),
+            description: this.getTextContent(infoNode, 'description') || '',
+            purpose: this.getTextContent(infoNode, 'purpose') || '',
+            milestone: this.getTextContent(infoNode, 'milestone') || ''
         };
     }
 
@@ -283,6 +286,9 @@ class IDSParser {
             xml += `        <version>${this.escapeXML(idsObject.info.version || 'IFC4')}</version>\n`;
             xml += `        <author>${this.escapeXML(idsObject.info.author || '')}</author>\n`;
             xml += `        <date>${this.escapeXML(idsObject.info.date || this.getCurrentDate())}</date>\n`;
+            xml += `        <description>${this.escapeXML(idsObject.info.description || '')}</description>\n`;
+            xml += `        <purpose>${this.escapeXML(idsObject.info.purpose || '')}</purpose>\n`;
+            xml += `        <milestone>${this.escapeXML(idsObject.info.milestone || '')}</milestone>\n`;
         } else {
             xml += `        <title>Сгенерированная проверка</title>\n`;
             xml += `        <copyright>Пользователь</copyright>\n`;

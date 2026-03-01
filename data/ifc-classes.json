@@ -46,6 +46,7 @@
   "IfcHeatExchanger": "Теплообменник",
   "IfcJunctionBox": "Распределительная коробка",
   "IfcLightFixture": "Осветительный прибор",
+  "IfcMaterial": "Материал",
   "IfcMechanicalFastener": "Крепеж",
   "IfcMember": "Стержневой элемент",
   "IfcOpeningElement": "Отверстие",

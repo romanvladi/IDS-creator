@@ -5,7 +5,7 @@ let currentIDS = {
     info: {
         title: 'Новая проверка',
         copyright: 'Пользователь',
-        version: 'IFC4',
+        version: '1.0.0',
         author: 'user@example.com',
         date: new Date().toISOString().split('T')[0]
     },
@@ -74,7 +74,7 @@ function setupEventListeners() {
     // Поля информации о файле
     document.getElementById('infoTitle').addEventListener('input', updateInfoFromForm);
     document.getElementById('infoAuthor').addEventListener('input', updateInfoFromForm);
-    document.getElementById('infoIfcVersion').addEventListener('change', updateInfoFromForm);
+    document.getElementById('infoFileVersion').addEventListener('change', updateInfoFromForm);
     document.getElementById('infoDate').addEventListener('change', updateInfoFromForm);
     document.getElementById('infoCopyright').addEventListener('input', updateInfoFromForm);
     
@@ -243,7 +243,7 @@ function saveFile() {
 function updateInfoFromCurrent() {
     document.getElementById('infoTitle').value = currentIDS.info.title || '';
     document.getElementById('infoAuthor').value = currentIDS.info.author || '';
-    document.getElementById('infoIfcVersion').value = currentIDS.info.version || 'IFC4';
+    document.getElementById('infoFileVersion').value = currentIDS.info.version || 'IFC4';
     document.getElementById('infoDate').value = currentIDS.info.date || new Date().toISOString().split('T')[0];
     document.getElementById('infoCopyright').value = currentIDS.info.copyright || 'Пользователь';
 }
@@ -254,7 +254,7 @@ function updateInfoFromCurrent() {
 function updateInfoFromForm() {
     currentIDS.info.title = document.getElementById('infoTitle').value;
     currentIDS.info.author = document.getElementById('infoAuthor').value;
-    currentIDS.info.version = document.getElementById('infoIfcVersion').value;
+    currentIDS.info.version = document.getElementById('infoFileVersion').value;
     currentIDS.info.date = document.getElementById('infoDate').value;
     currentIDS.info.copyright = document.getElementById('infoCopyright').value;
 }

@@ -282,6 +282,9 @@ function addNewSpecification() {
         id: `spec_${Date.now()}`,
         name: `Новая спецификация ${currentIDS.specifications.length + 1}`,
         ifcVersion: 'IFC4',
+        identifier: '',
+        description: '',
+        instructions: '',
         applicability: {
             rules: [
                 {
@@ -346,7 +349,11 @@ function renderSpecifications() {
         // Заменяем плейсхолдеры в шаблоне
         let cardHtml = specCardTemplate
             .replace('{{specId}}', spec.id)
-            .replace('{{specName}}', spec.name)
+            .replace('{{specName}}', spec.name || '')
+            .replace('{{ifcVersion}}', spec.ifcVersion || 'IFC4')
+            .replace('{{identifier}}', spec.identifier || '')
+            .replace('{{description}}', spec.description || '')
+            .replace('{{instructions}}', spec.instructions || '')
             .replace('{{entityValue}}', entityValue)
             .replace('{{rulesCount}}', rulesCount)
             .replace('{{rulesWord}}', getRulesWord(rulesCount));
@@ -361,7 +368,7 @@ function renderSpecifications() {
             card.classList.add('selected');
         }
         
-        // Добавляем обработчики (функция остается без изменений)
+        // Добавляем обработчики
         setupSpecCardHandlers(card, spec);
         
         specList.appendChild(card);
@@ -414,6 +421,30 @@ function setupSpecCardHandlers(card, spec) {
         if (selectedSpecId === spec.id) {
             document.getElementById('selectedSpecName').textContent = spec.name;
         }
+    });
+
+    // Редактирование версии ifc    
+    const ifcVersionInput = card.querySelector('.spec-ifcVersion');
+    ifcVersionInput.addEventListener('change', (e) => {
+        spec.ifcVersion = e.target.value;
+    });
+    
+    // Редактирование индификатора
+    const identifierInput = card.querySelector('.spec-identifier');
+    identifierInput.addEventListener('change', (e) => {
+        spec.identifier = e.target.value;
+    });
+
+    // Редактирование описания
+    const descriptionInput = card.querySelector('.spec-description');
+    descriptionInput.addEventListener('change', (e) => {
+        spec.description = e.target.value;
+    });
+
+    // Редактирование инструкций
+    const instructionsInput = card.querySelector('.spec-instructions');
+    instructionsInput.addEventListener('change', (e) => {
+        spec.instructions = e.target.value;
     });
     
     // Кнопка редактирования

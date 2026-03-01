@@ -1,12 +1,32 @@
 <div class="spec-card" data-spec-id="{{specId}}">
     <div class="spec-header">
-        <input type="text" class="spec-name" value="{{specName}}">
+        <input type="text" class="spec-name" value="{{specName}}" placeholder="Название">
         <div class="spec-actions">
             <button class="icon-btn edit-btn" title="Редактировать">✏️</button>
             <button class="icon-btn duplicate-btn" title="Дублировать">📋</button>
             <button class="icon-btn delete-btn" title="Удалить">🗑️</button>
         </div>
     </div>
+    
+    <div class="spec-fields">
+        <div class="spec-field">
+            <label>Версия IFC</label>
+            <input type="text" class="spec-ifcVersion" value="{{ifcVersion}}" placeholder="IFC4">
+        </div>
+        <div class="spec-field">
+            <label>Идентификатор</label>
+            <input type="text" class="spec-identifier" value="{{identifier}}" placeholder="Уникальный ID">
+        </div>
+        <div class="spec-field">
+            <label>Описание</label>
+            <input type="text" class="spec-description" value="{{description}}" placeholder="Описание спецификации">
+        </div>
+        <div class="spec-field">
+            <label>Инструкции</label>
+            <input type="text" class="spec-instructions" value="{{instructions}}" placeholder="Инструкции по применению">
+        </div>
+    </div>
+
     <div class="spec-preview">
         <span class="spec-badge">Сущность: <span class="entity-value">{{entityValue}}</span></span>
         <span class="spec-count">{{rulesCount}} {{rulesWord}}</span>

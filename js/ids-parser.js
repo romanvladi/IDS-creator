@@ -75,6 +75,9 @@ class IDSParser {
     parseSpecification(specNode, index) {
         const name = specNode.getAttribute('name') || `Спецификация ${index + 1}`;
         const ifcVersion = specNode.getAttribute('ifcVersion') || 'IFC4';
+        const identifier = specNode.getAttribute('identifier') || '';
+        const description = specNode.getAttribute('description') || '';
+        const instructions = specNode.getAttribute('instructions') || '';
 
         // Парсим applicability (условия отбора)
         const applicability = this.parseApplicability(specNode);
@@ -86,6 +89,9 @@ class IDSParser {
             id: `spec_${Date.now()}_${index}`,
             name: name,
             ifcVersion: ifcVersion,
+            identifier: identifier,
+            description: description,
+            instructions: instructions,
             applicability: applicability,
             requirements: requirements
         };
@@ -321,7 +327,22 @@ class IDSParser {
      * Генерирует XML для одной спецификации
      */
     generateSpecificationXML(spec) {
-        let xml = `        <specification name="${this.escapeXML(spec.name)}" ifcVersion="${this.escapeXML(spec.ifcVersion || 'IFC4')}">\n`;
+        let xml = `        <specification`;
+        xml += ` name="${this.escapeXML(spec.name || '')}"`;
+        xml += ` ifcVersion="${this.escapeXML(spec.ifcVersion || 'IFC4')}"`;
+        
+        // Добавляем опциональные атрибуты, только если они не пустые
+        if (spec.identifier) {
+            xml += ` identifier="${this.escapeXML(spec.identifier)}"`;
+        }
+        if (spec.description) {
+            xml += ` description="${this.escapeXML(spec.description)}"`;
+        }
+        if (spec.instructions) {
+            xml += ` instructions="${this.escapeXML(spec.instructions)}"`;
+        }
+        
+        xml += `>\n`;
 
         // Генерируем applicability
         xml += `            <applicability minOccurs="0" maxOccurs="unbounded">\n`;

@@ -48,6 +48,7 @@
   "IfcLightFixture": "Осветительный прибор",
   "IfcMechanicalFastener": "Крепеж",
   "IfcMember": "Стержневой элемент",
+  "IfcOpeningElement": "Отверстие",
   "IfcOutlet": "Розетка",
   "IfcPile": "Свая",
   "IfcPipeFitting": "Фитинг трубы",

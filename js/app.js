@@ -86,7 +86,7 @@ function setupEventListeners() {
     
     // Поле имени файла в шапке
     document.querySelector('.filename').addEventListener('input', (e) => {
-        currentIDS.info.title = e.target.value;
+        console.log('Имя файла изменено:', e.target.value);
     });
 }
 

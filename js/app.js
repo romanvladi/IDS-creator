@@ -144,7 +144,7 @@ function createNewFile() {
             info: {
                 title: 'Новая проверка',
                 copyright: 'Пользователь',
-                version: 'IFC4',
+                version: '1.0.0',
                 author: 'user@example.com',
                 date: new Date().toISOString().split('T')[0]
             },
